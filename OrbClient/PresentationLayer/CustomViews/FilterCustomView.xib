@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="HelveticaNeue.ttc">
+            <string>HelveticaNeue</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="yx3-cu-dvY" customClass="FilterCustomView" customModule="OrbClient" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select by area" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kJ0-Nf-htY">
+                    <rect key="frame" x="20" y="20" width="255" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="H53-1A-8L2"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZJz-z4-Ika">
+                    <rect key="frame" x="275" y="20" width="100" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="Kft-wh-gPq"/>
+                        <constraint firstAttribute="width" constant="100" id="nj8-Hb-kxT"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <state key="normal" title="Clear">
+                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ljj-g7-rkI">
+                    <rect key="frame" x="20" y="60" width="347" height="1"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="0.5" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="o06-nJ-JCl"/>
+                    </constraints>
+                </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kH6-Gv-pkX">
+                    <rect key="frame" x="0.0" y="617" width="375" height="50"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v9b-a9-DD8">
+                            <rect key="frame" x="255" y="8" width="100" height="34"/>
+                            <color key="backgroundColor" red="0.92789274450000003" green="0.300011009" blue="0.49200767280000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="100" id="mkW-sm-y51"/>
+                                <constraint firstAttribute="height" constant="34" id="oVG-4O-EXK"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <state key="normal" title="Filter">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <integer key="value" value="17"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                            </userDefinedRuntimeAttributes>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TME-ag-6Tc">
+                            <rect key="frame" x="135" y="8" width="100" height="35"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="100" id="2Xp-Bb-wh0"/>
+                                <constraint firstAttribute="height" constant="35" id="ukd-BC-T30"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <state key="normal" title="Cancel">
+                                <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="TME-ag-6Tc" firstAttribute="centerY" secondItem="kH6-Gv-pkX" secondAttribute="centerY" id="Kyz-ZM-tGJ"/>
+                        <constraint firstItem="v9b-a9-DD8" firstAttribute="centerY" secondItem="kH6-Gv-pkX" secondAttribute="centerY" id="dDZ-FA-1i9"/>
+                        <constraint firstAttribute="trailing" secondItem="v9b-a9-DD8" secondAttribute="trailing" constant="20" id="ogP-w3-udh"/>
+                        <constraint firstAttribute="height" constant="50" id="r6r-eE-NzN"/>
+                        <constraint firstItem="v9b-a9-DD8" firstAttribute="leading" secondItem="TME-ag-6Tc" secondAttribute="trailing" constant="20" id="sRC-IC-Ft5"/>
+                    </constraints>
+                </view>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="r3C-40-Mc5">
+                    <rect key="frame" x="20" y="61" width="355" height="556"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="Ljj-g7-rkI" firstAttribute="top" secondItem="ZJz-z4-Ika" secondAttribute="bottom" id="4Hz-B1-Pjj"/>
+                <constraint firstAttribute="trailing" secondItem="kH6-Gv-pkX" secondAttribute="trailing" id="7Hx-6p-IaK"/>
+                <constraint firstItem="ZJz-z4-Ika" firstAttribute="leading" secondItem="kJ0-Nf-htY" secondAttribute="trailing" id="ASW-OM-gSg"/>
+                <constraint firstItem="ZJz-z4-Ika" firstAttribute="top" secondItem="yx3-cu-dvY" secondAttribute="top" constant="20" id="C9m-7L-Ott"/>
+                <constraint firstItem="Ljj-g7-rkI" firstAttribute="leading" secondItem="yx3-cu-dvY" secondAttribute="leading" constant="20" id="GfV-oo-bU1"/>
+                <constraint firstItem="kH6-Gv-pkX" firstAttribute="leading" secondItem="yx3-cu-dvY" secondAttribute="leading" id="HjP-1r-cga"/>
+                <constraint firstAttribute="trailing" secondItem="ZJz-z4-Ika" secondAttribute="trailing" id="SaA-ll-spb"/>
+                <constraint firstItem="r3C-40-Mc5" firstAttribute="leading" secondItem="yx3-cu-dvY" secondAttribute="leading" constant="20" id="Squ-Pd-dqo"/>
+                <constraint firstItem="kJ0-Nf-htY" firstAttribute="top" secondItem="yx3-cu-dvY" secondAttribute="top" constant="20" id="ar9-Q8-kZK"/>
+                <constraint firstAttribute="trailing" secondItem="Ljj-g7-rkI" secondAttribute="trailing" constant="8" id="b2w-X3-g0S"/>
+                <constraint firstAttribute="bottom" secondItem="kH6-Gv-pkX" secondAttribute="bottom" id="e18-pC-nJw"/>
+                <constraint firstAttribute="trailing" secondItem="r3C-40-Mc5" secondAttribute="trailing" id="j2k-GM-3bs"/>
+                <constraint firstItem="kJ0-Nf-htY" firstAttribute="leading" secondItem="yx3-cu-dvY" secondAttribute="leading" constant="20" id="kJq-wc-Wsu"/>
+                <constraint firstItem="r3C-40-Mc5" firstAttribute="top" secondItem="Ljj-g7-rkI" secondAttribute="bottom" id="qeL-bd-bLm"/>
+                <constraint firstItem="kH6-Gv-pkX" firstAttribute="top" secondItem="r3C-40-Mc5" secondAttribute="bottom" id="zlW-CE-rgZ"/>
+            </constraints>
+            <connections>
+                <outlet property="btnCancel" destination="TME-ag-6Tc" id="1Tv-iq-jp7"/>
+                <outlet property="btnClear" destination="ZJz-z4-Ika" id="kR3-P1-u8o"/>
+                <outlet property="btnFilter" destination="v9b-a9-DD8" id="U9X-Zy-vPC"/>
+                <outlet property="tblAreas" destination="r3C-40-Mc5" id="3dI-oh-ssw"/>
+            </connections>
+            <point key="canvasLocation" x="51.5" y="159.5"/>
+        </view>
+    </objects>
+</document>

@@ -1,0 +1,6 @@
+framework module Pods_OrbClient {
+  umbrella header "Pods-OrbClient-umbrella.h"
+
+  export *
+  module * { export * }
+}
