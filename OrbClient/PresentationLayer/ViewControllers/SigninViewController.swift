@@ -18,11 +18,11 @@ class SigninViewController: BaseViewController,ParserDelegate {
     @IBOutlet weak var constVwBottomHeight: NSLayoutConstraint!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        OrbUserDefaults.setLoginStatus(object: "false")
         // Do any additional setup after loading the view.
 
-        txtFldUserId.text = "demo1@myryd.com"
-        txtFldPwd.text = "password"
+//        txtFldUserId.text = "demo1@myryd.com"
+//        txtFldPwd.text = "password"
 //        txtFldUserId.text = "nishab@tminetwork.com"
 //        txtFldPwd.text = "Op12uhgcoo$!"
     }

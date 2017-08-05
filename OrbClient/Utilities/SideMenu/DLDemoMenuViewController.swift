@@ -149,15 +149,27 @@ class DLDemoMenuViewController: UIViewController, UITableViewDelegate, UITableVi
             }
             else
             {
-                let vc =  UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SigninViewController") as! SigninViewController
-                OrbUserDefaults.setLoginStatus(object: "false")
-                let navVC = UINavigationController.init(rootViewController: vc)
-                if let hamburguerViewController = self.findHamburguerViewController() {
-                    hamburguerViewController.hideMenuViewControllerWithCompletion(completion: { () -> Void in
-                        hamburguerViewController.contentViewController = navVC
+                DispatchQueue.main.async {
+                    let alert = UIAlertController(title: "Alert!", message: "Are you sure you want to logout?", preferredStyle: UIAlertControllerStyle.alert)
+                    let action = UIAlertAction(title: "Ok", style: .default, handler: { (act) in
+                        DispatchQueue.main.async {
+                            let vc =  UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SigninViewController") as! SigninViewController
+                            OrbUserDefaults.setLoginStatus(object: "false")
+                            let navVC = UINavigationController.init(rootViewController: vc)
+                            if let hamburguerViewController = self.findHamburguerViewController() {
+                                hamburguerViewController.hideMenuViewControllerWithCompletion(completion: { () -> Void in
+                                    hamburguerViewController.contentViewController = navVC
+                                })
+                            }
+                        }
                     })
+                    alert.addAction(action)
+                    alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
+                    
+                    self.present(alert, animated: true, completion: nil)
                 }
-
+                
+                
             }
             
         }
@@ -176,14 +188,27 @@ class DLDemoMenuViewController: UIViewController, UITableViewDelegate, UITableVi
         }
         else
         {
-            let vc =  UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SigninViewController") as! SigninViewController
-            OrbUserDefaults.setLoginStatus(object: "false")
-            let navVC = UINavigationController.init(rootViewController: vc)
-            if let hamburguerViewController = self.findHamburguerViewController() {
-                hamburguerViewController.hideMenuViewControllerWithCompletion(completion: { () -> Void in
-                    hamburguerViewController.contentViewController = navVC
+            DispatchQueue.main.async {
+                let alert = UIAlertController(title: "Alert!", message: "Are you sure you want to logout?", preferredStyle: UIAlertControllerStyle.alert)
+                let action = UIAlertAction(title: "Ok", style: .default, handler: { (act) in
+                    DispatchQueue.main.async {
+                        let vc =  UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SigninViewController") as! SigninViewController
+                        OrbUserDefaults.setLoginStatus(object: "false")
+                        let navVC = UINavigationController.init(rootViewController: vc)
+                        if let hamburguerViewController = self.findHamburguerViewController() {
+                            hamburguerViewController.hideMenuViewControllerWithCompletion(completion: { () -> Void in
+                                hamburguerViewController.contentViewController = navVC
+                            })
+                        }
+                    }
                 })
+                alert.addAction(action)
+                alert.addAction(UIAlertAction(title: "CanceZ", style: .default, handler: nil))
+
+                self.present(alert, animated: true, completion: nil)
             }
+            
+
         }
     }
     
