@@ -12,7 +12,6 @@
 		A70CE8CA1EA8C80300ED9B00 /* LineChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70CE8C91EA8C80300ED9B00 /* LineChart.swift */; };
 		A726878B1E82C37E00862544 /* ViewOrUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A726878A1E82C37E00862544 /* ViewOrUpdateViewController.swift */; };
 		A726878D1E82C3B200862544 /* CouponsOrLeadsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A726878C1E82C3B200862544 /* CouponsOrLeadsViewController.swift */; };
-		A726878F1E82C3D500862544 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A726878E1E82C3D500862544 /* SettingsViewController.swift */; };
 		A72687911E82C3FE00862544 /* RequestCallBackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72687901E82C3FE00862544 /* RequestCallBackViewController.swift */; };
 		A729E73A1E8CE959001CE514 /* FRHyperLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A729E7391E8CE959001CE514 /* FRHyperLabel.m */; };
 		A72F7E761E8CFC900019EF32 /* UserAdsBO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72F7E751E8CFC900019EF32 /* UserAdsBO.swift */; };
@@ -68,11 +67,9 @@
 		A78709651E8407200052A39D /* OverviewBO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78709641E8407200052A39D /* OverviewBO.swift */; };
 		A78709671E840C4E0052A39D /* HomeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78709661E840C4E0052A39D /* HomeData.swift */; };
 		A78709691E840CEF0052A39D /* ChartData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78709681E840CEF0052A39D /* ChartData.swift */; };
-		A787096B1E8418CF0052A39D /* ReportsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A787096A1E8418CF0052A39D /* ReportsViewController.swift */; };
 		A7A381501E7E6F7100E1C852 /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A3814F1E7E6F7100E1C852 /* MenuCell.swift */; };
 		A7A381521E7E74F600E1C852 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A381511E7E74F600E1C852 /* BaseViewController.swift */; };
 		A7A381541E7EB6DC00E1C852 /* RGPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A381531E7EB6DC00E1C852 /* RGPageViewController.swift */; };
-		A7A381561E7EBDBD00E1C852 /* DataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A381551E7EBDBD00E1C852 /* DataViewController.swift */; };
 		A7A381581E7EC06A00E1C852 /* HomeCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A381571E7EC06A00E1C852 /* HomeCustomCell.swift */; };
 		A7B104A71E7D4AD20071BA6F /* OrbUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B104A61E7D4AD20071BA6F /* OrbUserDefaults.swift */; };
 		A7B104D61E7D50610071BA6F /* BaseBL.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B104C71E7D50610071BA6F /* BaseBL.swift */; };
@@ -86,6 +83,7 @@
 		A7E020331ED07F8F00534790 /* MyClientsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E020321ED07F8F00534790 /* MyClientsViewController.swift */; };
 		A7E020351ED081E100534790 /* ClientCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E020341ED081E100534790 /* ClientCustomCell.swift */; };
 		A7E3458F1F48448A00B959B7 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E3458E1F48448A00B959B7 /* Reachability.swift */; };
+		A7E345931F48680200B959B7 /* HelpScreensViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E345921F48680200B959B7 /* HelpScreensViewController.swift */; };
 		A7E4BA481E7BDBEB0064577E /* DLDemoMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E4BA431E7BDBEB0064577E /* DLDemoMenuViewController.swift */; };
 		A7E4BA4A1E7BDBEB0064577E /* DLHamburguerContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E4BA451E7BDBEB0064577E /* DLHamburguerContainerViewController.swift */; };
 		A7E4BA4B1E7BDBEB0064577E /* DLHamburguerNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E4BA461E7BDBEB0064577E /* DLHamburguerNavigationController.swift */; };
@@ -105,7 +103,6 @@
 		A70CE8C91EA8C80300ED9B00 /* LineChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineChart.swift; sourceTree = "<group>"; };
 		A726878A1E82C37E00862544 /* ViewOrUpdateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewOrUpdateViewController.swift; sourceTree = "<group>"; };
 		A726878C1E82C3B200862544 /* CouponsOrLeadsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CouponsOrLeadsViewController.swift; sourceTree = "<group>"; };
-		A726878E1E82C3D500862544 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		A72687901E82C3FE00862544 /* RequestCallBackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestCallBackViewController.swift; sourceTree = "<group>"; };
 		A729E7371E8CE958001CE514 /* OrbClient-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OrbClient-Bridging-Header.h"; sourceTree = "<group>"; };
 		A729E7381E8CE959001CE514 /* FRHyperLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRHyperLabel.h; sourceTree = "<group>"; };
@@ -167,11 +164,9 @@
 		A78709641E8407200052A39D /* OverviewBO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverviewBO.swift; sourceTree = "<group>"; };
 		A78709661E840C4E0052A39D /* HomeData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeData.swift; sourceTree = "<group>"; };
 		A78709681E840CEF0052A39D /* ChartData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartData.swift; sourceTree = "<group>"; };
-		A787096A1E8418CF0052A39D /* ReportsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportsViewController.swift; sourceTree = "<group>"; };
 		A7A3814F1E7E6F7100E1C852 /* MenuCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
 		A7A381511E7E74F600E1C852 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		A7A381531E7EB6DC00E1C852 /* RGPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RGPageViewController.swift; sourceTree = "<group>"; };
-		A7A381551E7EBDBD00E1C852 /* DataViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataViewController.swift; sourceTree = "<group>"; };
 		A7A381571E7EC06A00E1C852 /* HomeCustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeCustomCell.swift; sourceTree = "<group>"; };
 		A7B104A61E7D4AD20071BA6F /* OrbUserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrbUserDefaults.swift; sourceTree = "<group>"; };
 		A7B104C71E7D50610071BA6F /* BaseBL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseBL.swift; sourceTree = "<group>"; };
@@ -185,6 +180,7 @@
 		A7E020321ED07F8F00534790 /* MyClientsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyClientsViewController.swift; sourceTree = "<group>"; };
 		A7E020341ED081E100534790 /* ClientCustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientCustomCell.swift; sourceTree = "<group>"; };
 		A7E3458E1F48448A00B959B7 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		A7E345921F48680200B959B7 /* HelpScreensViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpScreensViewController.swift; sourceTree = "<group>"; };
 		A7E4BA431E7BDBEB0064577E /* DLDemoMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DLDemoMenuViewController.swift; sourceTree = "<group>"; };
 		A7E4BA451E7BDBEB0064577E /* DLHamburguerContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DLHamburguerContainerViewController.swift; sourceTree = "<group>"; };
 		A7E4BA461E7BDBEB0064577E /* DLHamburguerNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DLHamburguerNavigationController.swift; sourceTree = "<group>"; };
@@ -355,16 +351,14 @@
 				A73FDFE41E77DC77009B06A1 /* OverviewViewController.swift */,
 				A7E4BA4F1E7BF46E0064577E /* SigninViewController.swift */,
 				A7A381511E7E74F600E1C852 /* BaseViewController.swift */,
-				A7A381551E7EBDBD00E1C852 /* DataViewController.swift */,
 				A726878A1E82C37E00862544 /* ViewOrUpdateViewController.swift */,
 				A726878C1E82C3B200862544 /* CouponsOrLeadsViewController.swift */,
-				A726878E1E82C3D500862544 /* SettingsViewController.swift */,
 				A72687901E82C3FE00862544 /* RequestCallBackViewController.swift */,
-				A787096A1E8418CF0052A39D /* ReportsViewController.swift */,
 				A7EAD16D1E9D4E0F00C2FD1F /* ForgotPasswordViewController.swift */,
 				A7E020301ED07F7E00534790 /* MyHoldingsViewController.swift */,
 				A7E020321ED07F8F00534790 /* MyClientsViewController.swift */,
 				A7C2C3841ED40986009C38F5 /* AddHoardingViewController.swift */,
+				A7E345921F48680200B959B7 /* HelpScreensViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -660,12 +654,10 @@
 				A73FE0261E77DCD1009B06A1 /* Indicator.swift in Sources */,
 				A73FE0341E77DCD1009B06A1 /* IQUIViewController+Additions.swift in Sources */,
 				A73FDFE61E77DC77009B06A1 /* AppDelegate.swift in Sources */,
-				A787096B1E8418CF0052A39D /* ReportsViewController.swift in Sources */,
 				A78709691E840CEF0052A39D /* ChartData.swift in Sources */,
 				A7E020331ED07F8F00534790 /* MyClientsViewController.swift in Sources */,
 				A73FE03D1E77DCD1009B06A1 /* IQTitleBarButtonItem.swift in Sources */,
 				A7A381541E7EB6DC00E1C852 /* RGPageViewController.swift in Sources */,
-				A726878F1E82C3D500862544 /* SettingsViewController.swift in Sources */,
 				A72687911E82C3FE00862544 /* RequestCallBackViewController.swift in Sources */,
 				A7E4BA4B1E7BDBEB0064577E /* DLHamburguerNavigationController.swift in Sources */,
 				A73FE0371E77DCD1009B06A1 /* IQKeyboardManagerConstantsInternal.swift in Sources */,
@@ -673,6 +665,7 @@
 				A726878D1E82C3B200862544 /* CouponsOrLeadsViewController.swift in Sources */,
 				A73FE0391E77DCD1009B06A1 /* IQKeyboardReturnKeyHandler.swift in Sources */,
 				A73FDFCC1E77DBAC009B06A1 /* OrbClient.xcdatamodeld in Sources */,
+				A7E345931F48680200B959B7 /* HelpScreensViewController.swift in Sources */,
 				A7EAD16E1E9D4E0F00C2FD1F /* ForgotPasswordViewController.swift in Sources */,
 				A7C2C3851ED40986009C38F5 /* AddHoardingViewController.swift in Sources */,
 				A78709671E840C4E0052A39D /* HomeData.swift in Sources */,
@@ -695,7 +688,6 @@
 				A73FE01E1E77DCD1009B06A1 /* Filter.swift in Sources */,
 				A73FE01B1E77DCD1009B06A1 /* AnimatedImageView.swift in Sources */,
 				A73FE03A1E77DCD1009B06A1 /* IQTextView.swift in Sources */,
-				A7A381561E7EBDBD00E1C852 /* DataViewController.swift in Sources */,
 				A7E4BA4A1E7BDBEB0064577E /* DLHamburguerContainerViewController.swift in Sources */,
 				A7B104E51E7D599F0071BA6F /* UserBO.swift in Sources */,
 				A70CE8CA1EA8C80300ED9B00 /* LineChart.swift in Sources */,

@@ -30,8 +30,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         else
         {
-            vc =  UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SigninViewController") as! SigninViewController
+            if OrbUserDefaults.getHelpScreenStatus() == "true"
+            {
+                vc =  UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SigninViewController") as! SigninViewController
+            }
+            else
+            {
+                vc =  UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HelpScreensViewController") as! HelpScreensViewController
+            }
         }
+
         let rootVC = self.window?.rootViewController as? RootViewController
         rootVC?.contentViewController = UINavigationController.init(rootViewController: vc)
         
