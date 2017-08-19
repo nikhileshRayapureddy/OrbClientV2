@@ -544,7 +544,7 @@ open class LineChart: UIView {
             yValue = self.bounds.height - self.y.scale(i) - (y.axis.inset * 1.5)
             let label = UILabel(frame: CGRect(x: 0, y: yValue, width: y.axis.inset + 0, height: y.axis.inset))
             label.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.caption2)
-            label.textAlignment = .left
+            label.textAlignment = .right
             label.adjustsFontSizeToFitWidth = true
             label.text = String(Int(round(i))) + "K"
             self.addSubview(label)

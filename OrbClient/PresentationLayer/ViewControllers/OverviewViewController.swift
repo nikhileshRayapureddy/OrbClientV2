@@ -263,6 +263,8 @@ class OverviewViewController:  BaseViewController,ParserDelegate {
             if homeData.arrOverView.count > 7
             {
                 let data: [CGFloat] = [CGFloat((Int(homeData.arrOverView[6].imageCount)!/1000)),CGFloat((Int(homeData.arrOverView[5].imageCount)!/1000)),CGFloat((Int(homeData.arrOverView[4].imageCount)!/1000))]
+//                let data: [CGFloat] = [CGFloat(8888),CGFloat(0),CGFloat(0)]
+
                 let currentMonth = Calendar.current.date(byAdding: .month, value: 0, to: Date())
                 let lastMonth = Calendar.current.date(byAdding: .month, value: -1, to: Date())
                 let last2Month = Calendar.current.date(byAdding: .month, value: -2, to: Date())
@@ -448,27 +450,26 @@ extension OverviewViewController:SimpleBarChartDelegate,SimpleBarChartDataSource
     }
     func barChart(_ barChart: SimpleBarChart!, xLabelForBarAt index: Int) -> String! {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "YYYY-MM-DD"
-        
+        dateFormatter.dateFormat = "yyyy-MM-dd"
         if barChart == chartImage
         {
             let chartData = homeData.arrImage[index]
             let date = dateFormatter.date(from: chartData.date)
-            dateFormatter.dateFormat = "MMM-DD"
+            dateFormatter.dateFormat = "MMM-dd"
             return dateFormatter.string(from:date!)
         }
         else if barChart == chartBanner
         {
             let chartData = homeData.arrBanner[index]
             let date = dateFormatter.date(from: chartData.date)
-            dateFormatter.dateFormat = "MMM-DD"
+            dateFormatter.dateFormat = "MMM-dd"
             return dateFormatter.string(from:date!)
         }
         else
         {
             let chartData = homeData.arrVideo[index]
             let date = dateFormatter.date(from: chartData.date)
-            dateFormatter.dateFormat = "MMM-DD"
+            dateFormatter.dateFormat = "MMM-dd"
             return dateFormatter.string(from:date!)
         }
     }

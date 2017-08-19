@@ -1281,7 +1281,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="170"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="a9g-DZ-5wp">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profilePic" translatesAutoresizingMaskIntoConstraints="NO" id="a9g-DZ-5wp">
                                         <rect key="frame" x="10" y="45" width="80" height="80"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -1938,7 +1938,7 @@
             <objects>
                 <navigationController restorationIdentifier="contentViewController" storyboardIdentifier="contentViewController" automaticallyAdjustsScrollViewInsets="NO" id="XGl-xI-h3z" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="1Qg-aQ-cJ9">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="1Qg-aQ-cJ9">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -3058,6 +3058,7 @@
         <image name="imgCard3" width="25" height="25"/>
         <image name="imgCard4" width="22" height="23"/>
         <image name="logo" width="124" height="63"/>
+        <image name="profilePic" width="80" height="80"/>
         <image name="sideMenu_TopBg" width="326" height="158"/>
     </resources>
 </document>
