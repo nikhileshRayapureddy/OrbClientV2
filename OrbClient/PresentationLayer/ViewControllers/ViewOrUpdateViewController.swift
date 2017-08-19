@@ -51,7 +51,15 @@ class ViewOrUpdateViewController: BaseViewController,UIImagePickerControllerDele
     override func viewDidLoad() {
         super.viewDidLoad()
         self.designNavBarWith(title: "View Or Update Ads",isSync: true)
-        self.getUserads()
+        if app_delegate.isServerReachable
+        {
+            self.getUserads()
+        }
+        else
+        {
+            self.showAlertWith(title: "Alert!", message:NO_INTERNET)
+        }
+
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -72,7 +80,14 @@ class ViewOrUpdateViewController: BaseViewController,UIImagePickerControllerDele
     }
     override func syncClicked(sender:UIButton)
     {
-        self.getUserads()
+        if app_delegate.isServerReachable
+        {
+            self.getUserads()
+        }
+        else
+        {
+            self.showAlertWith(title: "Alert!", message:NO_INTERNET)
+        }
     }
 
     func parsingFinished(_ object: AnyObject?, withTag tag: NSInteger) {
@@ -129,7 +144,10 @@ class ViewOrUpdateViewController: BaseViewController,UIImagePickerControllerDele
     }
     override func menuClicked(sender: UIButton) {
         super.menuClicked(sender: sender)
-        self.player.pause()
+        if self.player != nil
+        {
+            self.player.pause()
+        }
     }
     func bindata()
     {
@@ -145,15 +163,26 @@ class ViewOrUpdateViewController: BaseViewController,UIImagePickerControllerDele
          var thumbnail = UIImage(cgImage:imageRef)
 
  */
-        let videoUrl = URL(string: userAds.video_ad)
-        let item = AVPlayerItem(url: videoUrl!)
-        self.player = AVPlayer(playerItem: item)
-        self.avpController = AVPlayerViewController()
-        self.avpController.player = self.player
-        avpController.view.frame = CGRect(x: 0, y: 0, width: vwPlayer.frame.size.width, height: vwPlayer.frame.size.height)
-        self.addChildViewController(avpController)
-        vwPlayer.addSubview(avpController.view)
-        lblVideoStatus.text = userAds.video_Status
+        if userAds.video_ad != ""
+        {
+            let videoUrl = URL(string: userAds.video_ad)
+            let item = AVPlayerItem(url: videoUrl!)
+            self.player = AVPlayer(playerItem: item)
+            self.avpController = AVPlayerViewController()
+            self.avpController.player = self.player
+            avpController.view.frame = CGRect(x: 0, y: 0, width: vwPlayer.frame.size.width, height: vwPlayer.frame.size.height)
+            self.addChildViewController(avpController)
+            vwPlayer.addSubview(avpController.view)
+            
+        }
+        if userAds.video_Status == ""
+        {
+            lblVideoStatus.text = "No Video ad"
+        }
+        else
+        {
+            lblVideoStatus.text = userAds.video_Status
+        }
         if lblVideoStatus.text?.lowercased() == "live"
         {
             lblVideoStatus.textColor = UIColor(red: 0, green: 113.0/255.0, blue: 0, alpha: 1.0)
@@ -251,6 +280,8 @@ class ViewOrUpdateViewController: BaseViewController,UIImagePickerControllerDele
             
             if dataTemp.length/1024/1024 < 75
             {
+                btnUpdateAdvertisement.isEnabled = true
+                btnUpdateAdvertisement.alpha = 1
                 videoData = dataTemp as Data
                 isVideoEditClicked = false
                 isVideoSelected = true
@@ -258,6 +289,11 @@ class ViewOrUpdateViewController: BaseViewController,UIImagePickerControllerDele
                 self.player = AVPlayer(playerItem: item)
                 self.avpController = AVPlayerViewController()
                 self.avpController.player = self.player
+                self.avpController.player = self.player
+                avpController.view.frame = CGRect(x: 0, y: 0, width: vwPlayer.frame.size.width, height: vwPlayer.frame.size.height)
+                self.addChildViewController(avpController)
+                vwPlayer.addSubview(avpController.view)
+
             }
             else
             {
@@ -273,6 +309,8 @@ class ViewOrUpdateViewController: BaseViewController,UIImagePickerControllerDele
             print("image width:",image.size.width)
             if image.size.width == 520 && image.size.height == 110
             {
+                btnUpdateAdvertisement.isEnabled = true
+                btnUpdateAdvertisement.alpha = 1
                 isBannerAdEditClicked = false
                 isBannerAdSelected = true
                 bannerData = UIImageJPEGRepresentation(info[UIImagePickerControllerOriginalImage] as! UIImage, 0.7)!
@@ -290,7 +328,8 @@ class ViewOrUpdateViewController: BaseViewController,UIImagePickerControllerDele
             let image = info[UIImagePickerControllerOriginalImage] as! UIImage
             if image.size.width == 1280 && image.size.height == 850
             {
-                
+                btnUpdateAdvertisement.isEnabled = true
+                btnUpdateAdvertisement.alpha = 1
                 isFullAdEditClicked = false
                 isFullAdSelected = true
                 fullAdData = UIImageJPEGRepresentation(info[UIImagePickerControllerOriginalImage] as! UIImage, 0.7)!
@@ -309,21 +348,55 @@ class ViewOrUpdateViewController: BaseViewController,UIImagePickerControllerDele
         
         if isBannerAdSelected
         {
-            self.uploadData(data: bannerData)
+            if app_delegate.isServerReachable
+            {
+                self.uploadData(data: bannerData)
+            }
+            else
+            {
+                self.showAlertWith(title: "Alert!", message:NO_INTERNET)
+            }
+
         }
         else if isFullAdSelected
         {
-            self.uploadData(data: fullAdData)
+            if app_delegate.isServerReachable
+            {
+                self.uploadData(data: fullAdData)
+            }
+            else
+            {
+                self.showAlertWith(title: "Alert!", message:NO_INTERNET)
+            }
+
         }
         else if isVideoSelected
         {
-            self.uploadData(data: videoData)
+            if app_delegate.isServerReachable
+            {
+                self.uploadData(data: videoData)
+            }
+            else
+            {
+                self.showAlertWith(title: "Alert!", message:NO_INTERNET)
+            }
         }
         else if userAds.shareLink_PreviousURL != lblShareLink.text || lblShareContent1.text != userAds.Text_default1 + userAds.shareLink_Content +  userAds.Text_default2
 
         {
-            app_delegate.showLoader(message: "Updating data....")
-            self.updateShareLink()
+            if app_delegate.isServerReachable
+            {
+                btnUpdateAdvertisement.isEnabled = false
+                btnUpdateAdvertisement.alpha = 0.5
+                
+                app_delegate.showLoader(message: "Updating data....")
+                self.updateShareLink()
+            }
+            else
+            {
+                self.showAlertWith(title: "Alert!", message:NO_INTERNET)
+            }
+
 
         
         }
@@ -405,6 +478,8 @@ class ViewOrUpdateViewController: BaseViewController,UIImagePickerControllerDele
     {
         if isSMSEdit
         {
+            btnUpdateAdvertisement.isEnabled = true
+            btnUpdateAdvertisement.alpha = 1
             isSMSEdit = false
             userAds.shareLink_Content = vwPopUp.txtVw.text
             lblShareContent1.text = userAds.Text_default1 + " " + userAds.shareLink_Content +  userAds.Text_default2
@@ -412,6 +487,8 @@ class ViewOrUpdateViewController: BaseViewController,UIImagePickerControllerDele
         }
         else if isShareLink
         {
+            btnUpdateAdvertisement.isEnabled = true
+            btnUpdateAdvertisement.alpha = 1
             isShareLink = false
             userAds.shareLink_PreviousURL = vwPopUp.txtVw.text
             lblShareLink.text = userAds.shareLink_PreviousURL

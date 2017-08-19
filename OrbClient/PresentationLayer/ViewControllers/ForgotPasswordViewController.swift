@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ForgotPasswordViewController: UIViewController,ParserDelegate {
+class ForgotPasswordViewController: BaseViewController,ParserDelegate {
 
     @IBOutlet weak var txtFldEmail: UITextField!
     override func viewDidLoad() {
@@ -39,7 +39,15 @@ class ForgotPasswordViewController: UIViewController,ParserDelegate {
         }
         else
         {
-            self.resetPassword()
+            if app_delegate.isServerReachable
+            {
+                self.resetPassword()
+            }
+            else
+            {
+                self.showAlertWith(title: "Alert!", message:NO_INTERNET)
+            }
+
             
         }
     }

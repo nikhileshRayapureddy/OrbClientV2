@@ -7,7 +7,6 @@
 //
 
 import UIKit
-
 class OverviewViewController:  BaseViewController,ParserDelegate {
     var isShare = false
     var homeData = HomeData()
@@ -34,6 +33,7 @@ class OverviewViewController:  BaseViewController,ParserDelegate {
     @IBOutlet weak var vwBannersLineChartBase: UIView!
     var vwBannersLineChart: LineChart!
 
+    @IBOutlet weak var lblNoRecords: UILabel!
     
     
     
@@ -69,7 +69,13 @@ class OverviewViewController:  BaseViewController,ParserDelegate {
     var chartImage = SimpleBarChart()
     var chartBanner = SimpleBarChart()
     var chartVideo = SimpleBarChart()
-
+    
+    
+    @IBOutlet weak var constVwBaseimageHeight: NSLayoutConstraint!
+    @IBOutlet weak var constVwBaseBannerHeight: NSLayoutConstraint!
+    @IBOutlet weak var constVwBaseVideoHeight: NSLayoutConstraint!
+    @IBOutlet weak var constVwReportsHeight: NSLayoutConstraint!
+    
     override func loadView() {
         super.loadView()
         chartImage = SimpleBarChart(frame: CGRect(x: 20, y: 30, width: vwBaseImage.frame.size.width-25, height: 280))
@@ -147,8 +153,14 @@ class OverviewViewController:  BaseViewController,ParserDelegate {
             present(vc, animated: true)
 
         }
-        self.getUserData()
-
+        if app_delegate.isServerReachable
+        {
+            self.getUserData()
+        }
+        else
+        {
+            self.showAlertWith(title: "Alert!", message:NO_INTERNET)
+        }
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -161,7 +173,7 @@ class OverviewViewController:  BaseViewController,ParserDelegate {
         
         scrlVwVideos.contentSize = CGSize(width: scrlVwVideos.frame.size.width, height: 700)
 
-        scrlVwReports.contentSize = CGSize(width: scrlVwReports.frame.size.width, height: 1150)
+        scrlVwReports.contentSize = CGSize(width: scrlVwReports.frame.size.width, height: constVwReportsHeight.constant + 20)
 
     }
     @IBAction func btnBannerClicked(_ sender: UIButton) {
@@ -217,6 +229,7 @@ class OverviewViewController:  BaseViewController,ParserDelegate {
     }
     func parsingError(_ error: String?, withTag tag: NSInteger) {
         app_delegate.removeloder()
+        self.showAlertWith(title: "Alert!", message: error!)
     }
     func parsingFinished(_ object: AnyObject?, withTag tag: NSInteger) {
         app_delegate.removeloder()
@@ -227,46 +240,53 @@ class OverviewViewController:  BaseViewController,ParserDelegate {
     }
     override func syncClicked(sender:UIButton)
     {
-        self.getUserData()
-        self.btnBannerClicked(self.btnBanner)
+        if app_delegate.isServerReachable
+        {
+            self.getUserData()
+            self.btnBannerClicked(self.btnBanner)
+        }
+        else
+        {
+            self.showAlertWith(title: "Alert!", message:NO_INTERNET)
+        }
     }
 
     func bindData()
     {
         if homeData.arrOverView.count > 0
         {
-                lblBannersRightNowCount.text = homeData.arrOverView[0].imageCount
-                lblBannersSoFarCount.text = homeData.arrOverView[1].imageCount
-                lblBannersYesterdayCount.text = homeData.arrOverView[2].imageCount
-                lblBannersLast30DaysCount.text = homeData.arrOverView[3].imageCount
-                lblBanners30DaysClicks.text = homeData.arrOverView[7].imageCount
-                if homeData.arrOverView.count > 7
-                {
-                    let data: [CGFloat] = [CGFloat((Int(homeData.arrOverView[6].imageCount)!/1000)),CGFloat((Int(homeData.arrOverView[5].imageCount)!/1000)),CGFloat((Int(homeData.arrOverView[4].imageCount)!/1000))]
-                    let currentMonth = Calendar.current.date(byAdding: .month, value: 0, to: Date())
-                    let lastMonth = Calendar.current.date(byAdding: .month, value: -1, to: Date())
-                    let last2Month = Calendar.current.date(byAdding: .month, value: -2, to: Date())
-                    let dateFormatter = DateFormatter()
-                    
-                    dateFormatter.dateFormat = "MMM YYYY"
-                    
-                    let xLabels: [String] = [dateFormatter.string(from: last2Month!), dateFormatter.string(from: lastMonth!), dateFormatter.string(from: currentMonth!)]
-                    vwBannersLineChart = LineChart()
-                    vwBannersLineChart.frame = vwBannersLineChartBase.bounds
-                    vwBannersLineChart.animation.enabled = true
-                    vwBannersLineChart.area = false
-                    vwBannersLineChart.x.labels.visible = true
-                    vwBannersLineChart.x.grid.count = 5
-                    vwBannersLineChart.y.grid.count = 5
-                    vwBannersLineChart.x.labels.values = xLabels
-                    vwBannersLineChart.y.labels.visible = true
-                    vwBannersLineChart.dots.color = UIColor(red: 255.0/255.0, green: 23.0/255.0, blue: 83.0/255.0, alpha: 1.0)
-                    vwBannersLineChart.addLine(data)
-                    self.vwBannersLineChartBase.addSubview(vwBannersLineChart)
-                    vwBannersLineChart.translatesAutoresizingMaskIntoConstraints = false
-                    vwBannersLineChart.delegate = self
-                    
-                }
+            lblBannersRightNowCount.text = homeData.arrOverView[0].imageCount
+            lblBannersSoFarCount.text = homeData.arrOverView[1].imageCount
+            lblBannersYesterdayCount.text = homeData.arrOverView[2].imageCount
+            lblBannersLast30DaysCount.text = homeData.arrOverView[3].imageCount
+            lblBanners30DaysClicks.text = homeData.arrOverView[7].imageCount
+            if homeData.arrOverView.count > 7
+            {
+                let data: [CGFloat] = [CGFloat((Int(homeData.arrOverView[6].imageCount)!/1000)),CGFloat((Int(homeData.arrOverView[5].imageCount)!/1000)),CGFloat((Int(homeData.arrOverView[4].imageCount)!/1000))]
+                let currentMonth = Calendar.current.date(byAdding: .month, value: 0, to: Date())
+                let lastMonth = Calendar.current.date(byAdding: .month, value: -1, to: Date())
+                let last2Month = Calendar.current.date(byAdding: .month, value: -2, to: Date())
+                let dateFormatter = DateFormatter()
+                
+                dateFormatter.dateFormat = "MMM YYYY"
+                
+                let xLabels: [String] = [dateFormatter.string(from: last2Month!), dateFormatter.string(from: lastMonth!), dateFormatter.string(from: currentMonth!)]
+                vwBannersLineChart = LineChart()
+                vwBannersLineChart.frame = vwBannersLineChartBase.bounds
+                vwBannersLineChart.animation.enabled = true
+                vwBannersLineChart.area = false
+                vwBannersLineChart.x.labels.visible = true
+                vwBannersLineChart.x.grid.count = 5
+                vwBannersLineChart.y.grid.count = 5
+                vwBannersLineChart.x.labels.values = xLabels
+                vwBannersLineChart.y.labels.visible = true
+                vwBannersLineChart.dots.color = UIColor(red: 255.0/255.0, green: 23.0/255.0, blue: 83.0/255.0, alpha: 1.0)
+                vwBannersLineChart.addLine(data)
+                self.vwBannersLineChartBase.addSubview(vwBannersLineChart)
+                vwBannersLineChart.translatesAutoresizingMaskIntoConstraints = false
+                vwBannersLineChart.delegate = self
+                
+            }
             
             
             lblVideosRightNowCount.text = homeData.arrOverView[0].videoCount
@@ -305,10 +325,61 @@ class OverviewViewController:  BaseViewController,ParserDelegate {
             chartVideo.incrementValue = 10
             chartBanner.incrementValue = 10
             
+            
+            if homeData.arrImage.count <= 0
+            {
+                constVwBaseimageHeight.constant = 0
+                vwBaseImage.isHidden = true
+            }
+            else
+            {
+                constVwBaseimageHeight.constant = 330
+                vwBaseImage.isHidden = false
+            }
+            if homeData.arrBanner.count <= 0
+            {
+                constVwBaseBannerHeight.constant = 0
+                vwBaseBanner.isHidden = true
+            }
+            else
+            {
+                constVwBaseBannerHeight.constant = 330
+                vwBaseBanner.isHidden = false
+            }
+            
+            if homeData.arrVideo.count <= 0
+            {
+                constVwBaseVideoHeight.constant = 0
+                vwBaseVideo.isHidden = true
+            }
+            else
+            {
+                constVwBaseVideoHeight.constant = 330
+                vwBaseVideo.isHidden = false
+            }
+            
+            constVwReportsHeight.constant = constVwBaseimageHeight.constant + constVwBaseVideoHeight.constant + constVwBaseBannerHeight.constant
+            
+            if constVwReportsHeight.constant > 0
+            {
+                constVwReportsHeight.constant = constVwReportsHeight.constant + 100
+                lblNoRecords.isHidden = true
+                vwReports.isHidden = false
+                self.viewDidLayoutSubviews()
+                
+            }
+            else
+            {
+                lblNoRecords.isHidden = false
+                vwReports.isHidden = true
+            }
+            
+            
             chartImage.reloadData()
             chartVideo.reloadData()
             chartBanner.reloadData()
-
+            
+            
         }
     }
 

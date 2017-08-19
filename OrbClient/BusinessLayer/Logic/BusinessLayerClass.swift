@@ -13,7 +13,7 @@ let SOAP_ACTION = "SOAPAction"
 let CONTENT_LENGTH = "Content-Length"
 let CONTENT_TYPE  = "Content-Type"
 
-let NO_INTERNET = "No Internet Access. Check your network and try again."
+let NO_INTERNET = "Please check your intenet connection."
 let SERVER_ERROR = "Server not responding.\nPlease try after some time."
 
 let developer_API = "http://myryd.com/api/v1/"
@@ -476,7 +476,7 @@ class BusinessLayerClass: BaseBL {
     func reqCallbackWith(subject:String,msg:String)
     {
         let obj : HttpRequest = HttpRequest()
-        obj.tag = NSInteger(ParsingConstant.getLogin.rawValue)
+        obj.tag = NSInteger(ParsingConstant.ReqCallBacks.rawValue)
         obj._serviceURL = developer_API + "callback"
         obj.MethodNamee = "POST"
         obj.serviceName = ""

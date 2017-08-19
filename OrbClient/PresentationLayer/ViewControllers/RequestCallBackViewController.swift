@@ -66,7 +66,15 @@ class RequestCallBackViewController: BaseViewController,ParserDelegate {
         }
         else
         {
-            self.reqCallBackService()
+            if app_delegate.isServerReachable
+            {
+                self.reqCallBackService()
+            }
+            else
+            {
+                self.showAlertWith(title: "Alert!", message:NO_INTERNET)
+            }
+
         }
     }
     override func didReceiveMemoryWarning() {

@@ -17,7 +17,15 @@ class CouponsOrLeadsViewController: BaseViewController,UITableViewDelegate,UITab
     override func viewDidLoad() {
         super.viewDidLoad()
         self.designNavBarWith(title: "Leads",isSync: true)
-        self.getAllLeads()
+        if app_delegate.isServerReachable
+        {
+            self.getAllLeads()
+        }
+        else
+        {
+            self.showAlertWith(title: "Alert!", message:NO_INTERNET)
+        }
+
         // Do any additional setup after loading the view.
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -36,7 +44,14 @@ class CouponsOrLeadsViewController: BaseViewController,UITableViewDelegate,UITab
     }
     override func syncClicked(sender:UIButton)
     {
-        self.getAllLeads()
+        if app_delegate.isServerReachable
+        {
+            self.getAllLeads()
+        }
+        else
+        {
+            self.showAlertWith(title: "Alert!", message:NO_INTERNET)
+        }
     }
 
     func btnCallClicked(sender : UIButton)
@@ -49,7 +64,7 @@ class CouponsOrLeadsViewController: BaseViewController,UITableViewDelegate,UITab
         if (MFMessageComposeViewController.canSendText()) {
             let controller = MFMessageComposeViewController()
             controller.body = "Hi Please install Orb"
-            controller.recipients = [arrLeads[sender.tag - 5000]]
+            controller.recipients = [arrLeads[sender.tag - 9000]]
             controller.messageComposeDelegate = self
             self.present(controller, animated: true, completion: nil)
         }

@@ -74,13 +74,22 @@ class SigninViewController: BaseViewController,ParserDelegate {
         {
             OrbUserDefaults.setUserName(object: txtFldUserId.text!)
             OrbUserDefaults.setKeyWord(object: txtFldPwd.text!)
-            self.doLoginWith(username: txtFldUserId.text!, key: txtFldPwd.text!)
+            if app_delegate.isServerReachable
+            {
+                self.doLoginWith(username: txtFldUserId.text!, key: txtFldPwd.text!)
+            }
+            else
+            {
+                self.showAlertWith(title: "Alert!", message:NO_INTERNET)
+            }
+
             
         }
         
     }
     func parsingError(_ error: String?, withTag tag: NSInteger) {
         app_delegate.removeloder()
+        self.showAlertWith(title: "Alert!", message: error!)
     }
     func parsingFinished(_ object: AnyObject?, withTag tag: NSInteger) {
         app_delegate.removeloder()
@@ -99,6 +108,7 @@ class SigninViewController: BaseViewController,ParserDelegate {
     }
     func doLoginWith(username : String,key : String)
     {
+        
         app_delegate.showLoader(message: "Authenticating...")
         let Bl = BusinessLayerClass()
         Bl.callBack = self

@@ -85,6 +85,7 @@
 		A7E020311ED07F7E00534790 /* MyHoldingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E020301ED07F7E00534790 /* MyHoldingsViewController.swift */; };
 		A7E020331ED07F8F00534790 /* MyClientsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E020321ED07F8F00534790 /* MyClientsViewController.swift */; };
 		A7E020351ED081E100534790 /* ClientCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E020341ED081E100534790 /* ClientCustomCell.swift */; };
+		A7E3458F1F48448A00B959B7 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E3458E1F48448A00B959B7 /* Reachability.swift */; };
 		A7E4BA481E7BDBEB0064577E /* DLDemoMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E4BA431E7BDBEB0064577E /* DLDemoMenuViewController.swift */; };
 		A7E4BA4A1E7BDBEB0064577E /* DLHamburguerContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E4BA451E7BDBEB0064577E /* DLHamburguerContainerViewController.swift */; };
 		A7E4BA4B1E7BDBEB0064577E /* DLHamburguerNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E4BA461E7BDBEB0064577E /* DLHamburguerNavigationController.swift */; };
@@ -183,6 +184,7 @@
 		A7E020301ED07F7E00534790 /* MyHoldingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyHoldingsViewController.swift; sourceTree = "<group>"; };
 		A7E020321ED07F8F00534790 /* MyClientsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyClientsViewController.swift; sourceTree = "<group>"; };
 		A7E020341ED081E100534790 /* ClientCustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientCustomCell.swift; sourceTree = "<group>"; };
+		A7E3458E1F48448A00B959B7 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		A7E4BA431E7BDBEB0064577E /* DLDemoMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DLDemoMenuViewController.swift; sourceTree = "<group>"; };
 		A7E4BA451E7BDBEB0064577E /* DLHamburguerContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DLHamburguerContainerViewController.swift; sourceTree = "<group>"; };
 		A7E4BA461E7BDBEB0064577E /* DLHamburguerNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DLHamburguerNavigationController.swift; sourceTree = "<group>"; };
@@ -370,6 +372,7 @@
 		A73FDFE51E77DC77009B06A1 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				A7E3458E1F48448A00B959B7 /* Reachability.swift */,
 				A7F432191EABA7B900A3C2FE /* SimpleBarChart.h */,
 				A7F4321A1EABA7B900A3C2FE /* SimpleBarChart.m */,
 				A70CE8C91EA8C80300ED9B00 /* LineChart.swift */,
@@ -538,7 +541,7 @@
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = 767WDHBUJ6;
 						LastSwiftMigration = 0820;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -677,6 +680,7 @@
 				A73FE0331E77DCD1009B06A1 /* IQUIView+Hierarchy.swift in Sources */,
 				A729E73A1E8CE959001CE514 /* FRHyperLabel.m in Sources */,
 				A73FE0191E77DCD1009B06A1 /* FloatLabelTextField.swift in Sources */,
+				A7E3458F1F48448A00B959B7 /* Reachability.swift in Sources */,
 				A7D108341ED1E0A40090E0D6 /* FilterCustomView.swift in Sources */,
 				A73FE03E1E77DCD1009B06A1 /* IQToolbar.swift in Sources */,
 				A72F7E761E8CFC900019EF32 /* UserAdsBO.swift in Sources */,
@@ -830,17 +834,18 @@
 			baseConfigurationReference = 78E4950FA3907222400FF692 /* Pods-OrbClient.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				DEVELOPMENT_TEAM = 767WDHBUJ6;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Naga Siva Rayapureddy (8989E33E43)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = OrbClient/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.taksykraft.orbClient;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "5a175dff-6a44-4cfb-9c79-f5844f7ed399";
-				PROVISIONING_PROFILE_SPECIFIER = OrbClient_Dist;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "OrbClient/Utilities/OrbClient-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -852,17 +857,18 @@
 			baseConfigurationReference = 3EBCDC9A290B51E695DBF7E1 /* Pods-OrbClient.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				DEVELOPMENT_TEAM = 767WDHBUJ6;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Naga Siva Rayapureddy (8989E33E43)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = OrbClient/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.taksykraft.orbClient;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "5a175dff-6a44-4cfb-9c79-f5844f7ed399";
-				PROVISIONING_PROFILE_SPECIFIER = OrbClient_Dist;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "OrbClient/Utilities/OrbClient-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
