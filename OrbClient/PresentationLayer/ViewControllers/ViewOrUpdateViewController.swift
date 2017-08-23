@@ -134,12 +134,18 @@ class ViewOrUpdateViewController: BaseViewController,UIImagePickerControllerDele
         if tag == ParsingConstant.uploadImage.rawValue
         {
             DispatchQueue.main.async {
+                self.btnUpdateAdvertisement.isEnabled = true
+                self.btnUpdateAdvertisement.alpha = 1
+
                 self.showAlertWith(title: "Sorry!", message: error!)
             }
         }
         else
         {
             DispatchQueue.main.async {
+                self.btnUpdateAdvertisement.isEnabled = true
+                self.btnUpdateAdvertisement.alpha = 1
+
                 self.showAlertWith(title: "Sorry!", message: error!)
 
             }
@@ -352,6 +358,9 @@ class ViewOrUpdateViewController: BaseViewController,UIImagePickerControllerDele
     }
     @IBAction func btnUpdateAdvertisementClicked(_ sender: UIButton) {
         
+        btnUpdateAdvertisement.isEnabled = false
+        btnUpdateAdvertisement.alpha = 0.5
+
         if isBannerAdSelected
         {
             if app_delegate.isServerReachable
