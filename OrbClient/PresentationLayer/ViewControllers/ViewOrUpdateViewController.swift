@@ -9,6 +9,7 @@
 import UIKit
 import MediaPlayer
 import AVKit
+import UserNotifications
 class ViewOrUpdateViewController: BaseViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate,ParserDelegate,UITextViewDelegate {
     @IBOutlet weak var lblUrl: FRHyperLabel!
     @IBOutlet weak var vwPlayer: UIView!
@@ -51,6 +52,7 @@ class ViewOrUpdateViewController: BaseViewController,UIImagePickerControllerDele
     override func viewDidLoad() {
         super.viewDidLoad()
         self.designNavBarWith(title: "View Or Update Ads",isSync: true)
+
         if app_delegate.isServerReachable
         {
             self.getUserads()
@@ -96,6 +98,7 @@ class ViewOrUpdateViewController: BaseViewController,UIImagePickerControllerDele
             if isFullAdSelected
             {
                 isFullAdSelected = false
+                self.scheduleNotificationWith(text: "Image Uploaded")
                 self.uploadData(data: fullAdData)
             }
             else if isVideoSelected
@@ -105,6 +108,7 @@ class ViewOrUpdateViewController: BaseViewController,UIImagePickerControllerDele
             }
             else
             {
+                self.scheduleNotificationWith(text: "Image Uploaded")
                 self.updateShareLink()
             }
         }
@@ -320,6 +324,7 @@ class ViewOrUpdateViewController: BaseViewController,UIImagePickerControllerDele
             else
             {
                 self.showAlertWith(title: "Alert!", message: "Banner size should be 520 X 110 pixels.")
+                isBannerAdEditClicked = false
             }
             dismiss(animated:true, completion: nil)
         }
@@ -339,6 +344,7 @@ class ViewOrUpdateViewController: BaseViewController,UIImagePickerControllerDele
             else
             {
                 self.showAlertWith(title: "Alert!", message: "Image size should be 1280 X 850 pixels.")
+                isFullAdEditClicked = false
             }
             dismiss(animated:true, completion: nil)
 
@@ -416,6 +422,7 @@ class ViewOrUpdateViewController: BaseViewController,UIImagePickerControllerDele
             fileName = "\(NSDate().timeIntervalSince1970 * 1000)" + ".jpg"
             contentType = "image/jpeg"
             uploadString = "imageupload"
+            self.scheduleNotificationWith(text: "Image Uploading...")
         }
         else if isFullAdSelected
         {
@@ -424,6 +431,8 @@ class ViewOrUpdateViewController: BaseViewController,UIImagePickerControllerDele
             fileName = "\(NSDate().timeIntervalSince1970 * 1000)" + ".jpg"
             contentType = "image/jpeg"
             uploadString = "bannerupload"
+            self.scheduleNotificationWith(text: "Image Uploading...")
+
         }
         else if isVideoSelected
         {
@@ -527,6 +536,58 @@ class ViewOrUpdateViewController: BaseViewController,UIImagePickerControllerDele
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    func scheduleNotificationWith(text : String) {
+        DispatchQueue.main.async {
+
+        UNUserNotificationCenter.current().getNotificationSettings { (notificationSettings) in
+            switch notificationSettings.authorizationStatus {
+            case .notDetermined:
+                self.requestAuthorization(completionHandler: { (success) in
+                    guard success else { return }
+                    self.scheduleLocalNotificationWith(text: text)
+                })
+            case .authorized:
+                self.scheduleLocalNotificationWith(text: text)
+            case .denied:
+                print("Application Not Allowed to Display Notifications")
+            }
+        }
+        }
+    }
+    func requestAuthorization(completionHandler: @escaping (_ success: Bool) -> ()) {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (success, error) in
+            if let error = error {
+                print("Request Authorization Failed (\(error), \(error.localizedDescription))")
+            }
+            
+            completionHandler(success)
+        }
+    }
+    
+    func scheduleLocalNotificationWith(text : String) {
+        DispatchQueue.main.async {
+            UNUserNotificationCenter.current().delegate = self
+            let notificationContent = UNMutableNotificationContent()
+            notificationContent.title = "OrbClient"
+            notificationContent.body = text
+
+            let notificationTrigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+            let notificationRequest = UNNotificationRequest(identifier: "cocoacasts_local_notification", content: notificationContent, trigger: notificationTrigger)
+            UNUserNotificationCenter.current().add(notificationRequest) { (error) in
+                if let error = error {
+                    print("Unable to Add Notification Request (\(error), \(error.localizedDescription))")
+                }
+            }
+            
+        }
+    }
+    
+}
+extension ViewOrUpdateViewController: UNUserNotificationCenterDelegate {
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert])
     }
   
 }

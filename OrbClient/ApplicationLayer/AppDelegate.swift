@@ -10,6 +10,7 @@ import UIKit
 import CoreData
 import GoogleMaps
 import GooglePlaces
+import UserNotifications
 var globalCurrentPageIndex = -1
 var GOOGLE_API_KEY = "AIzaSyCxa3qvOePTxgafvf85wRVq3H4DkMQIDdw"
 @UIApplicationMain
@@ -52,6 +53,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("reachable = ",isServerReachable)
         isServerReachable = (reachability?.isReachable)!
         print("reachable after= ",isServerReachable)
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) {(accepted, error) in
+            if !accepted {
+                print("Notification access denied.")
+            }
+        }
 
         return true
     }

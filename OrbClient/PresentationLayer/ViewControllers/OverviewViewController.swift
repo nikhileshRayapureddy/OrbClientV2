@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import UserNotifications
 class OverviewViewController:  BaseViewController,ParserDelegate {
     var isShare = false
     var homeData = HomeData()
@@ -129,8 +130,48 @@ class OverviewViewController:  BaseViewController,ParserDelegate {
     }
 
     
+    func scheduleNotification() {
+        UNUserNotificationCenter.current().getNotificationSettings { (notificationSettings) in
+            switch notificationSettings.authorizationStatus {
+            case .notDetermined:
+                self.requestAuthorization(completionHandler: { (success) in
+                    guard success else { return }
+                    self.scheduleLocalNotification()
+                })
+            case .authorized:
+                self.scheduleLocalNotification()
+            case .denied:
+                print("Application Not Allowed to Display Notifications")
+            }
+        }
+    }
+    func requestAuthorization(completionHandler: @escaping (_ success: Bool) -> ()) {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (success, error) in
+            if let error = error {
+                print("Request Authorization Failed (\(error), \(error.localizedDescription))")
+            }
+            
+            completionHandler(success)
+        }
+    }
     
-    
+    func scheduleLocalNotification() {
+        UNUserNotificationCenter.current().delegate = self
+        let notificationContent = UNMutableNotificationContent()
+//        notificationContent.title = "Image Uploading...."
+        notificationContent.title = "Cocoacasts"
+        notificationContent.subtitle = "Local Notifications"
+        notificationContent.body = "In this tutorial, you learn how to schedule local notifications with the User Notifications framework."
+        
+        let notificationTrigger = UNTimeIntervalNotificationTrigger(timeInterval: 10.0, repeats: false)
+        let notificationRequest = UNNotificationRequest(identifier: "cocoacasts_local_notification", content: notificationContent, trigger: notificationTrigger)
+        UNUserNotificationCenter.current().add(notificationRequest) { (error) in
+            if let error = error {
+                print("Unable to Add Notification Request (\(error), \(error.localizedDescription))")
+            }
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -141,6 +182,7 @@ class OverviewViewController:  BaseViewController,ParserDelegate {
         lblVwBaseImageViews.transform = CGAffineTransform(rotationAngle: -CGFloat.pi / 2)
         lblVwBaseBannerViews.transform = CGAffineTransform(rotationAngle: -CGFloat.pi / 2)
         lblVwBaseVideoViews.transform = CGAffineTransform(rotationAngle: -CGFloat.pi / 2)
+        self.scheduleNotification()
 
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -153,7 +195,7 @@ class OverviewViewController:  BaseViewController,ParserDelegate {
         }
         if app_delegate.isServerReachable
         {
-            self.getUserData()
+//            self.getUserData()
         }
         else
         {
@@ -473,3 +515,11 @@ extension OverviewViewController:SimpleBarChartDelegate,SimpleBarChartDataSource
     }
 
 }
+extension OverviewViewController: UNUserNotificationCenterDelegate {
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert])
+    }
+    
+}
+
