@@ -126,8 +126,6 @@ class OverviewViewController:  BaseViewController,ParserDelegate {
         chartVideo.barTextColor = UIColor.white
         chartVideo.gridColor = UIColor.lightGray
         vwBaseVideo.addSubview(chartVideo)
-        
-        
     }
 
     
