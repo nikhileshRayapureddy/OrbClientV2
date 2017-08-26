@@ -10,6 +10,7 @@ import UIKit
 import MediaPlayer
 import AVKit
 import UserNotifications
+import MobileCoreServices
 class ViewOrUpdateViewController: BaseViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate,ParserDelegate,UITextViewDelegate {
     @IBOutlet weak var lblUrl: FRHyperLabel!
     @IBOutlet weak var vwPlayer: UIView!
@@ -98,7 +99,7 @@ class ViewOrUpdateViewController: BaseViewController,UIImagePickerControllerDele
             if isFullAdSelected
             {
                 isFullAdSelected = false
-                self.scheduleNotificationWith(text: "Image Uploaded")
+                self.scheduleNotificationWith(text: "Uploaded")
                 self.uploadData(data: fullAdData)
             }
             else if isVideoSelected
@@ -108,7 +109,7 @@ class ViewOrUpdateViewController: BaseViewController,UIImagePickerControllerDele
             }
             else
             {
-                self.scheduleNotificationWith(text: "Image Uploaded")
+                self.scheduleNotificationWith(text: "Uploaded")
                 self.updateShareLink()
             }
         }
@@ -275,6 +276,21 @@ class ViewOrUpdateViewController: BaseViewController,UIImagePickerControllerDele
             print("Camera not available.")
         }
     }
+    func openVideoCamera() {
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary) {
+            print("captureVideoPressed and camera available.")
+            
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.sourceType = .photoLibrary
+            imagePicker.mediaTypes = [kUTTypeMovie as String]
+            imagePicker.allowsEditing = false
+            self.present(imagePicker, animated: true, completion: nil)
+        } else {
+            print("Camera not available.")
+        }
+    }
+
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if isVideoEditClicked
         {
@@ -431,7 +447,7 @@ class ViewOrUpdateViewController: BaseViewController,UIImagePickerControllerDele
             fileName = "\(NSDate().timeIntervalSince1970 * 1000)" + ".jpg"
             contentType = "image/jpeg"
             uploadString = "imageupload"
-            self.scheduleNotificationWith(text: "Image Uploading...")
+            self.scheduleNotificationWith(text: "Uploading...")
         }
         else if isFullAdSelected
         {
@@ -440,7 +456,7 @@ class ViewOrUpdateViewController: BaseViewController,UIImagePickerControllerDele
             fileName = "\(NSDate().timeIntervalSince1970 * 1000)" + ".jpg"
             contentType = "image/jpeg"
             uploadString = "bannerupload"
-            self.scheduleNotificationWith(text: "Image Uploading...")
+            self.scheduleNotificationWith(text: "Uploading...")
 
         }
         else if isVideoSelected
@@ -451,14 +467,14 @@ class ViewOrUpdateViewController: BaseViewController,UIImagePickerControllerDele
             contentType = "video/mov"
             uploadString = "videoupload"
         }
-        app_delegate.showLoader(message: "uploading....")
+        app_delegate.showLoader(message: "Uploading....")
         let BL = BusinessLayerClass()
         BL.callBack = self
         BL.uploadWith(data: data, dataType: dataType, fileName: fileName, contentType: contentType,uploadString:uploadString)
     }
     @IBAction func btnEditVideoClicked(_ sender: UIButton) {
         isVideoEditClicked = true
-        self.openCamera()
+        self.openVideoCamera()
     }
     
     @IBAction func btnBannerAdEditClicked(_ sender: UIButton) {

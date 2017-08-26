@@ -191,6 +191,7 @@ class DLDemoMenuViewController: UIViewController, UITableViewDelegate, UITableVi
                 let alert = UIAlertController(title: "Alert!", message: "Are you sure you want to logout?", preferredStyle: UIAlertControllerStyle.alert)
                 let action = UIAlertAction(title: "Ok", style: .default, handler: { (act) in
                     DispatchQueue.main.async {
+                        tableView.deselectRow(at: indexPath, animated: false)
                         let vc =  UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SigninViewController") as! SigninViewController
                         OrbUserDefaults.setLoginStatus(object: "false")
                         let navVC = UINavigationController.init(rootViewController: vc)
@@ -202,7 +203,7 @@ class DLDemoMenuViewController: UIViewController, UITableViewDelegate, UITableVi
                     }
                 })
                 alert.addAction(action)
-                alert.addAction(UIAlertAction(title: "CanceZ", style: .default, handler: nil))
+                alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
 
                 self.present(alert, animated: true, completion: nil)
             }

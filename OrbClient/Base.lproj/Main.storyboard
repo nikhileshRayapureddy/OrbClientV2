@@ -1525,6 +1525,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="utc-uY-F2G"/>
                     <connections>
+                        <outlet property="btnRememberMe" destination="eHo-wX-k5X" id="Rbd-H0-m8k"/>
                         <outlet property="txtFldPwd" destination="l5I-4v-Yor" id="iHY-Ch-XKV"/>
                         <outlet property="txtFldUserId" destination="j2m-ry-Fns" id="7Iv-C8-f5q"/>
                     </connections>
@@ -2714,7 +2715,7 @@
     <resources>
         <image name="DashboardBg" width="375" height="666"/>
         <image name="Remember_selected" width="19" height="19"/>
-        <image name="Remember_unselected" width="19" height="19"/>
+        <image name="Remember_unselected" width="20" height="20"/>
         <image name="SignInBg" width="375" height="666"/>
         <image name="aler" width="23" height="22"/>
         <image name="ap_intro_bg" width="1440" height="2560"/>

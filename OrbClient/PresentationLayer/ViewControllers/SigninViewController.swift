@@ -13,6 +13,7 @@ class SigninViewController: BaseViewController,ParserDelegate {
 
     @IBOutlet weak var txtFldUserId: FloatLabelTextField!
     
+    @IBOutlet weak var btnRememberMe: UIButton!
     @IBOutlet weak var lblWishText: UILabel!
     @IBOutlet weak var txtFldPwd: FloatLabelTextField!
     @IBOutlet weak var constVwBottomHeight: NSLayoutConstraint!
@@ -34,14 +35,6 @@ class SigninViewController: BaseViewController,ParserDelegate {
     }
     @IBAction func btnRememberMeClicked(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
-        if sender.isSelected
-        {
-            OrbUserDefaults.setLoginStatus(object: "true")
-        }
-        else
-        {
-            OrbUserDefaults.setLoginStatus(object: "false")
-        }
     }
     
     @IBAction func btnSignInClicked(_ sender: UIButton) {
@@ -98,6 +91,15 @@ class SigninViewController: BaseViewController,ParserDelegate {
             }
             else
             {
+                if self.btnRememberMe.isSelected
+                {
+                    OrbUserDefaults.setLoginStatus(object: "true")
+                }
+                else
+                {
+                    OrbUserDefaults.setLoginStatus(object: "false")
+                }
+
                 self.navigateToHome()
             }
         }
