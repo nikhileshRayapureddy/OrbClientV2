@@ -61,7 +61,6 @@ class DLDemoMenuViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
         if indexPath.row == 0
         {
             let vc =  UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "OverviewViewController") as! OverviewViewController
@@ -128,7 +127,7 @@ class DLDemoMenuViewController: UIViewController, UITableViewDelegate, UITableVi
             {
                 if let hamburguerViewController = self.findHamburguerViewController() {
                     hamburguerViewController.hideMenuViewControllerWithCompletion(completion: { () -> Void in
-                        let vc = UIActivityViewController(activityItems: ["Hi, Please install OrbClient."], applicationActivities: [])
+                        let vc = UIActivityViewController(activityItems: ["I'm using Orb to enhance my brand, why don't you try? Contact Details - prithvi@taksykraft.com, 84660 98869 or sharath@taksykraft.com, 76608 76601"], applicationActivities: [])
                         hamburguerViewController.contentViewController.present(vc, animated: true)
                     })
                 }
@@ -179,7 +178,7 @@ class DLDemoMenuViewController: UIViewController, UITableViewDelegate, UITableVi
             {
                 if let hamburguerViewController = self.findHamburguerViewController() {
                     hamburguerViewController.hideMenuViewControllerWithCompletion(completion: { () -> Void in
-                        let vc = UIActivityViewController(activityItems: ["Hi, Please install OrbClient."], applicationActivities: [])
+                        let vc = UIActivityViewController(activityItems: ["I'm using Orb to enhance my brand, why don't you try? Contact Details - prithvi@taksykraft.com, 84660 98869 or sharath@taksykraft.com, 76608 76601"], applicationActivities: [])
                         hamburguerViewController.contentViewController.present(vc, animated: true)
                     })
                 }

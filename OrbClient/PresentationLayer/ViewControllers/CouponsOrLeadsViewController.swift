@@ -42,6 +42,9 @@ class CouponsOrLeadsViewController: BaseViewController,UITableViewDelegate,UITab
         return cell
 
     }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50
+    }
     override func syncClicked(sender:UIButton)
     {
         if app_delegate.isServerReachable
@@ -63,7 +66,7 @@ class CouponsOrLeadsViewController: BaseViewController,UITableViewDelegate,UITab
     {
         if (MFMessageComposeViewController.canSendText()) {
             let controller = MFMessageComposeViewController()
-            controller.body = "Hi Please install Orb"
+            controller.body = "I'm using Orb to enhance my brand, why don't you try? Contact Details - prithvi@taksykraft.com, 84660 98869 or sharath@taksykraft.com, 76608 76601"
             controller.recipients = [arrLeads[sender.tag - 9000]]
             controller.messageComposeDelegate = self
             self.present(controller, animated: true, completion: nil)

@@ -160,7 +160,7 @@ import UIKit
 
 	fileprivate func adjustTopTextInset() {
 		var inset = textContainerInset
-		inset.top = initialTopInset + title.font.lineHeight + hintYPadding
+		inset.top = 0
 		textContainerInset = inset
 	}
 	

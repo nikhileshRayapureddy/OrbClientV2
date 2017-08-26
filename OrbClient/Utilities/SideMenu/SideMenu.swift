@@ -23,7 +23,7 @@ enum DLHamburguerMenuBackgroundStyle: Int {
 }
 
 // Constants
-private let kDLHamburguerMenuSpan: CGFloat = 50.0
+private let kDLHamburguerMenuSpan: CGFloat = 0.25 * ScreenWidth
 
 /**
  * The DLHamburguerViewController is the main VC managing the content view controller and the menu view controller.
@@ -37,7 +37,7 @@ class SideMenu: UIViewController,UIGestureRecognizerDelegate {
     var gestureEnabled = true
     
     // appearance
-    var overlayAlpha: CGFloat = 0.3                                // % of dark fading of the background (0.0 - 1.0)
+    var overlayAlpha: CGFloat = 0.6                                // % of dark fading of the background (0.0 - 1.0)
     var animationDuration: TimeInterval = 0.35
     
     

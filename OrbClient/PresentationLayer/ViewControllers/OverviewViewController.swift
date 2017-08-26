@@ -147,7 +147,7 @@ class OverviewViewController:  BaseViewController,ParserDelegate {
         super.viewWillAppear(animated)
         if isShare
         {
-            let vc = UIActivityViewController(activityItems: ["Hi, Please install OrbClient."], applicationActivities: [])
+            let vc = UIActivityViewController(activityItems: ["I'm using Orb to enhance my brand, why don't you try? Contact Details - prithvi@taksykraft.com, 84660 98869 or sharath@taksykraft.com, 76608 76601"], applicationActivities: [])
             present(vc, animated: true)
 
         }

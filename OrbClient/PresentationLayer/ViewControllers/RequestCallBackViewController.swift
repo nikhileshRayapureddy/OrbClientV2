@@ -12,11 +12,12 @@ class RequestCallBackViewController: BaseViewController,ParserDelegate {
     @IBOutlet weak var txtFldSub: FloatLabelTextField!
     @IBOutlet weak var txtVwMsg: UITextView!
     @IBOutlet weak var btnReqCallBack: UIButton!
+    @IBOutlet weak var vwTxtVwBg: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.designNavBarWith(title: "Request call back",isSync: false)
-        txtVwMsg.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.5).cgColor
-        txtVwMsg.layer.borderWidth = 0.5
+        vwTxtVwBg.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.5).cgColor
+        vwTxtVwBg.layer.borderWidth = 0.5
         txtFldSub.layer.cornerRadius = 5
         txtFldSub.layer.masksToBounds = true
     }

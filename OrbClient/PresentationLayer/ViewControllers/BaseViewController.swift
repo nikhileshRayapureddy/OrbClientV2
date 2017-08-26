@@ -30,15 +30,18 @@ class BaseViewController: UIViewController {
         menuButton.frame = CGRect(x: -2, y: 0  , width: 44 , height: 44)
         menuButton.setImage(UIImage(named: "menu"), for: UIControlState.normal)
         menuButton.addTarget(self, action: #selector(menuClicked(sender:)), for: .touchUpInside)
+        menuButton.contentHorizontalAlignment = .left
         let leftBarButtonItem: UIBarButtonItem = UIBarButtonItem(customView: menuButton)
         let tempButton = UIButton(type: UIButtonType.custom)
         tempButton.frame = CGRect(x: 45, y: 0  , width: 40 , height: 44)
+        
         var rightBarButtonItem = UIBarButtonItem()
         if isSync
         {
             let btnSync = UIButton(type: UIButtonType.custom)
             btnSync.frame = CGRect(x: -2, y: 0  , width: 44 , height: 44)
             btnSync.setImage(UIImage(named: "sync"), for: UIControlState.normal)
+            btnSync.contentHorizontalAlignment = .right
             btnSync.addTarget(self, action: #selector(syncClicked(sender:)), for: .touchUpInside)
             rightBarButtonItem = UIBarButtonItem(customView: btnSync)
         }
