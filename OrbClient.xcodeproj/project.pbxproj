@@ -236,7 +236,6 @@
 			children = (
 				A73FDFD81E77DC77009B06A1 /* ApplicationLayer */,
 				A73FDFDA1E77DC77009B06A1 /* BusinessLayer */,
-				A73FDFDD1E77DC77009B06A1 /* DataAccessLayer */,
 				A73FDFE01E77DC77009B06A1 /* PresentationLayer */,
 				A73FDFE51E77DC77009B06A1 /* Utilities */,
 				A73FDFC71E77DBAC009B06A1 /* Main.storyboard */,
@@ -284,29 +283,6 @@
 				A78709661E840C4E0052A39D /* HomeData.swift */,
 				A78709681E840CEF0052A39D /* ChartData.swift */,
 				A72F7E751E8CFC900019EF32 /* UserAdsBO.swift */,
-			);
-			path = Objects;
-			sourceTree = "<group>";
-		};
-		A73FDFDD1E77DC77009B06A1 /* DataAccessLayer */ = {
-			isa = PBXGroup;
-			children = (
-				A73FDFDE1E77DC77009B06A1 /* Logic */,
-				A73FDFDF1E77DC77009B06A1 /* Objects */,
-			);
-			path = DataAccessLayer;
-			sourceTree = "<group>";
-		};
-		A73FDFDE1E77DC77009B06A1 /* Logic */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Logic;
-			sourceTree = "<group>";
-		};
-		A73FDFDF1E77DC77009B06A1 /* Objects */ = {
-			isa = PBXGroup;
-			children = (
 			);
 			path = Objects;
 			sourceTree = "<group>";
@@ -829,15 +805,15 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Naga Siva Rayapureddy (8989E33E43)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 767WDHBUJ6;
 				INFOPLIST_FILE = OrbClient/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.taksykraft.orbClient;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "5a175dff-6a44-4cfb-9c79-f5844f7ed399";
-				PROVISIONING_PROFILE_SPECIFIER = OrbClient_Dist;
+				PROVISIONING_PROFILE = "bcba89da-2d5b-4e3e-b24b-edc223430cb3";
+				PROVISIONING_PROFILE_SPECIFIER = OrbClient_Dev;
 				SWIFT_OBJC_BRIDGING_HEADER = "OrbClient/Utilities/OrbClient-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -852,15 +828,15 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Naga Siva Rayapureddy (8989E33E43)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 767WDHBUJ6;
 				INFOPLIST_FILE = OrbClient/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.taksykraft.orbClient;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "5a175dff-6a44-4cfb-9c79-f5844f7ed399";
-				PROVISIONING_PROFILE_SPECIFIER = OrbClient_Dist;
+				PROVISIONING_PROFILE = "bcba89da-2d5b-4e3e-b24b-edc223430cb3";
+				PROVISIONING_PROFILE_SPECIFIER = OrbClient_Dev;
 				SWIFT_OBJC_BRIDGING_HEADER = "OrbClient/Utilities/OrbClient-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};

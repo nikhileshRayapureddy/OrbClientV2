@@ -11,6 +11,17 @@ import MediaPlayer
 import AVKit
 import UserNotifications
 import MobileCoreServices
+
+let bannerImageWidth : CGFloat = 980
+let bannerImageHeight : CGFloat = 180
+
+let fullAddImageWidth : CGFloat = 1548
+let fullAddImageHeight : CGFloat = 904
+
+let videoSize = 75
+
+let errorValue : CGFloat = 20
+
 class ViewOrUpdateViewController: BaseViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate,ParserDelegate,UITextViewDelegate {
     @IBOutlet weak var lblUrl: FRHyperLabel!
     @IBOutlet weak var vwPlayer: UIView!
@@ -304,7 +315,7 @@ class ViewOrUpdateViewController: BaseViewController,UIImagePickerControllerDele
                 }
             }
             
-            if dataTemp.length/1024/1024 < 75
+            if dataTemp.length/1024/1024 <= videoSize
             {
                 btnUpdateAdvertisement.isEnabled = true
                 btnUpdateAdvertisement.alpha = 1
@@ -330,46 +341,62 @@ class ViewOrUpdateViewController: BaseViewController,UIImagePickerControllerDele
         }
         else if isBannerAdEditClicked
         {
-            let image = info[UIImagePickerControllerOriginalImage] as! UIImage
-            print("image height:",image.size.height)
-            print("image width:",image.size.width)
-            if image.size.width == 520 && image.size.height == 110
+            if info[UIImagePickerControllerMediaType] as! String == "public.image"
             {
-                btnUpdateAdvertisement.isEnabled = true
-                btnUpdateAdvertisement.alpha = 1
-                isBannerAdEditClicked = false
-                isBannerAdSelected = true
-                bannerData = UIImageJPEGRepresentation(info[UIImagePickerControllerOriginalImage] as! UIImage, 0.7)!
-                imgBannerAd.contentMode = .scaleAspectFit
-                imgBannerAd.image = info[UIImagePickerControllerOriginalImage] as? UIImage
+                let image = info[UIImagePickerControllerOriginalImage] as! UIImage
+                print("image height:",image.size.height)
+                print("image width:",image.size.width)
+                if image.size.width >= bannerImageWidth - errorValue && image.size.width <= bannerImageWidth + errorValue && image.size.height >= bannerImageHeight - errorValue && image.size.height <= bannerImageHeight + errorValue
+                    
+                {
+                    btnUpdateAdvertisement.isEnabled = true
+                    btnUpdateAdvertisement.alpha = 1
+                    isBannerAdEditClicked = false
+                    isBannerAdSelected = true
+                    bannerData = UIImageJPEGRepresentation(info[UIImagePickerControllerOriginalImage] as! UIImage, 0.7)!
+                    imgBannerAd.contentMode = .scaleAspectFit
+                    imgBannerAd.image = info[UIImagePickerControllerOriginalImage] as? UIImage
+                }
+                else
+                {
+                    self.showAlertWith(title: "Alert!", message: "Banner size should be \(Int(bannerImageWidth)) X \(Int(bannerImageHeight)) pixels.")
+                    isBannerAdEditClicked = false
+                }
             }
             else
             {
-                self.showAlertWith(title: "Alert!", message: "Banner size should be 520 X 110 pixels.")
-                isBannerAdEditClicked = false
+                self.showAlertWith(title: "Alert!", message: "Please select a Image type.")
             }
             dismiss(animated:true, completion: nil)
         }
         else if isFullAdEditClicked
         {
-            let image = info[UIImagePickerControllerOriginalImage] as! UIImage
-            if image.size.width == 1280 && image.size.height == 850
+            if info[UIImagePickerControllerMediaType] as! String == "public.image"
             {
-                btnUpdateAdvertisement.isEnabled = true
-                btnUpdateAdvertisement.alpha = 1
-                isFullAdEditClicked = false
-                isFullAdSelected = true
-                fullAdData = UIImageJPEGRepresentation(info[UIImagePickerControllerOriginalImage] as! UIImage, 0.7)!
-                imgFullAd.contentMode = .scaleAspectFit
-                imgFullAd.image = info[UIImagePickerControllerOriginalImage] as? UIImage
+                
+                let image = info[UIImagePickerControllerOriginalImage] as! UIImage
+                if image.size.width >= fullAddImageWidth - errorValue && image.size.width <= fullAddImageWidth + errorValue && image.size.height >= fullAddImageHeight - errorValue && image.size.height <= fullAddImageHeight + errorValue
+                {
+                    btnUpdateAdvertisement.isEnabled = true
+                    btnUpdateAdvertisement.alpha = 1
+                    isFullAdEditClicked = false
+                    isFullAdSelected = true
+                    fullAdData = UIImageJPEGRepresentation(info[UIImagePickerControllerOriginalImage] as! UIImage, 0.7)!
+                    imgFullAd.contentMode = .scaleAspectFit
+                    imgFullAd.image = info[UIImagePickerControllerOriginalImage] as? UIImage
+                }
+                else
+                {
+                    self.showAlertWith(title: "Alert!", message: "Image size should be \(Int(fullAddImageWidth)) X \(Int(fullAddImageHeight)) pixels.")
+                    isFullAdEditClicked = false
+                }
             }
             else
             {
-                self.showAlertWith(title: "Alert!", message: "Image size should be 1280 X 850 pixels.")
-                isFullAdEditClicked = false
+                self.showAlertWith(title: "Alert!", message: "Please select a Image type.")
             }
             dismiss(animated:true, completion: nil)
-
+            
         }
     }
     @IBAction func btnUpdateAdvertisementClicked(_ sender: UIButton) {
@@ -494,7 +521,7 @@ class ViewOrUpdateViewController: BaseViewController,UIImagePickerControllerDele
         isSMSEdit = true
 
         vwPopUp.txtVw.text = userAds.shareLink_Content
-        vwPopUp.lblCharCount.text = "\(vwPopUp.txtVw.text.characters.count)//160"
+        vwPopUp.lblCharCount.text = "\(vwPopUp.txtVw.text.count)/160"
         vwPopUp.btnBg.addTarget(self, action: #selector(btnPopUpBgClicked(sender:)), for: .touchUpInside)
         vwPopUp.btnCancel.addTarget(self, action: #selector(btnCancelClicked(sender:)), for: .touchUpInside)
         vwPopUp.btnUpdate.addTarget(self, action: #selector(btnUpdateClicked(sender:)), for: .touchUpInside)
@@ -538,12 +565,17 @@ class ViewOrUpdateViewController: BaseViewController,UIImagePickerControllerDele
         return true
     }
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        if textView.text.characters.count > 160 && range.length == 0 {
+        
+        let strText = textView.text + text
+        if (strText.count) <= 160
+        {
+            vwPopUp.lblCharCount.text = "\(strText.count - range.length)/160"
+            return true
+        }
+        else
+        {
             return false
         }
-        vwPopUp.lblCharCount.text = "\(textView.text.characters.count)\\160"
-
-        return true
     }
     @IBAction func btnShareLinkClicked(_ sender: UIButton) {
         vwPopUp =   (Bundle.main.loadNibNamed("CustomAlertView", owner: nil, options: nil)![0] as? CustomAlertView)!
@@ -551,7 +583,7 @@ class ViewOrUpdateViewController: BaseViewController,UIImagePickerControllerDele
         vwPopUp.txtVw.delegate = self
         isShareLink = true
         vwPopUp.txtVw.text = userAds.shareLink_PreviousURL
-        vwPopUp.lblCharCount.text = "\(vwPopUp.txtVw.text.characters.count)//160"
+        vwPopUp.lblCharCount.text = "\(vwPopUp.txtVw.text.count)/160"
         vwPopUp.btnBg.addTarget(self, action: #selector(btnPopUpBgClicked(sender:)), for: .touchUpInside)
         vwPopUp.btnCancel.addTarget(self, action: #selector(btnCancelClicked(sender:)), for: .touchUpInside)
         vwPopUp.btnUpdate.addTarget(self, action: #selector(btnUpdateClicked(sender:)), for: .touchUpInside)
