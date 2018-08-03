@@ -14,6 +14,7 @@ class HelpScreensViewController: BaseViewController,UIScrollViewDelegate {
     @IBOutlet weak var btnSkip: UIButton!
     @IBOutlet weak var pageControl: UIPageControl!
     
+    @IBOutlet weak var constVwBaseWidth: NSLayoutConstraint!
     @IBOutlet weak var btnNext: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +31,7 @@ class HelpScreensViewController: BaseViewController,UIScrollViewDelegate {
     {
         super.viewDidLayoutSubviews()
             scrlVwHelpScreens.contentSize = CGSize(width: self.view.bounds.size.width * 3, height: self.view.bounds.size.height - 60)
+        constVwBaseWidth.constant = self.view.bounds.size.width * 3
     }
     
     override func didReceiveMemoryWarning() {
