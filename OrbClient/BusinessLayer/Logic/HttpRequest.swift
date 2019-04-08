@@ -62,15 +62,15 @@ class HttpRequest
         var requestBody:Data?
         var strUrl : String = _serviceURL as String
         
-        if params.count > 0 && self.tag != ParsingConstant.getLogin.rawValue
+        if params.count > 0
         {
             requestBody = self.doPrepareSOAPEnvelope().data(using: String.Encoding.utf8.rawValue)
         }
-        if serviceName.characters.count > 0
+        if serviceName.count > 0
         {
             strUrl = strUrl + "/" + serviceName
         }
-        var webStringURL = strUrl.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
+        let webStringURL = strUrl.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
 
         var request  = URLRequest(url: URL(string:webStringURL)!)
         request.httpMethod = MethodNamee
@@ -84,15 +84,9 @@ class HttpRequest
         config.timeoutIntervalForRequest = 40.0
         config.timeoutIntervalForResource = 40.0
         let session = URLSession(configuration: config)
-        if self.tag == ParsingConstant.getLogin.rawValue // CRM URL
+        if self.tag != ParsingConstant.getLogin.rawValue && self.tag != ParsingConstant.forgotPassword.rawValue
         {
-            let username = self.params["email"] as! String
-            let password = self.params["password"] as! String
-            let loginString = NSString(format: "%@:%@", username, password)
-            let loginData: NSData = loginString.data(using: String.Encoding.utf8.rawValue)! as NSData
-            let base64LoginString = loginData.base64EncodedString(options: NSData.Base64EncodingOptions(rawValue:0))
-            
-            request.setValue("Basic " + base64LoginString, forHTTPHeaderField: "Authorization")
+            request.setValue("Bearer " + OrbUserDefaults.getAccessToken(), forHTTPHeaderField: "Authorization")
         }
 
         let task = session.dataTask(with: request) { (data, response, err) in

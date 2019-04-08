@@ -14,6 +14,7 @@ let  Mobile = "Mobile"
 let  isRemember = "isRemember"
 let  isAddAgency = "isAddAgency"
 let  isHelpScreens = "isHelpScreens"
+let AccessToken = "acccessToken"
 class OrbUserDefaults: NSObject {
     class func setUserName (object : String)
     {
@@ -71,7 +72,16 @@ class OrbUserDefaults: NSObject {
         UserDefaults.standard.set(object, forKey: isHelpScreens)
         UserDefaults.standard.synchronize()
     }
-    
+    class func getAccessToken () -> String
+    {
+        return UserDefaults.standard.object(forKey: AccessToken) as! String
+    }
+    class func setAccessToken (object : String)
+    {
+        UserDefaults.standard.set(object, forKey: AccessToken)
+        UserDefaults.standard.synchronize()
+    }
+
     class func getHelpScreenStatus () -> String
     {
         if UserDefaults.standard.object(forKey: isHelpScreens) as? String == nil

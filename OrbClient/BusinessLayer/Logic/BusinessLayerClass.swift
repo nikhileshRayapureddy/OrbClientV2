@@ -16,7 +16,8 @@ let CONTENT_TYPE  = "Content-Type"
 let NO_INTERNET = "Please check your intenet connection."
 let SERVER_ERROR = "Server not responding.\nPlease try after some time."
 
-let developer_API = "http://myryd.com/api/v1/"
+//let developer_API = "http://myryd.com/api/v1/"
+let developer_API = "http://188.166.225.215/orbclient/api/v1/"
 
 let ScreenWidth =  UIScreen.main.bounds.size.width
 let ScreenHeight = UIScreen.main.bounds.size.height
@@ -29,8 +30,8 @@ class BusinessLayerClass: BaseBL {
     {
         let obj : HttpRequest = HttpRequest()
         obj.tag = NSInteger(ParsingConstant.getLogin.rawValue)
-        obj._serviceURL = developer_API + "login?email=" + username + "&password=" + key //API Method
-        obj.MethodNamee = "GET"
+        obj._serviceURL = developer_API + "get-oauth" //API Method
+        obj.MethodNamee = "POST"
         obj.serviceName = ""
         var dataDict = [String:AnyObject]()
         dataDict["email"] = username as AnyObject?
@@ -43,96 +44,130 @@ class BusinessLayerClass: BaseBL {
             }
             else
             {
-                if let error = obj.parsedDataDict["error"] as? String
+                if let error = obj.parsedDataDict["error"] as? Bool
                 {
-                    if Bool(error) == false
+                    if error == false
                     {
-                        if let data = obj.parsedDataDict["data"] as? [[String:AnyObject]]
+                        if let user = obj.parsedDataDict["data"] as? [String:AnyObject]
                         {
-                            if data.count > 0
+                            let userBo = UserBO()
+                            if let id = user["id"] as? NSNumber
                             {
-                                let userBo = UserBO()
-                                for user in data
-                                {
-                                    if let user_id = user["user_id"] as? String
-                                    {
-                                        userBo.user_id = user_id
-                                        OrbUserDefaults.setUserId(object: user_id)
-                                    }
-                                    if let name = user["name"] as? String
-                                    {
-                                        OrbUserDefaults.setName(object: name)
-                                        userBo.name = name
-                                    }
-                                    if let email = user["email"] as? String
-                                    {
-                                        userBo.email = email
-                                    }
-                                    if let account_type = user["account_type"] as? String
-                                    {
-                                        userBo.account_type = account_type
-                                    }
-                                    if let video_views = user["video_views"] as? String
-                                    {
-                                        userBo.video_views = video_views
-                                    }
-                                    if let image_views = user["image_views"] as? String
-                                    {
-                                        userBo.image_views = image_views
-                                    }
-                                    if let max_image_views = user["max_image_views"] as? String
-                                    {
-                                        userBo.max_image_views = max_image_views
-                                    }
-                                    if let max_video_views = user["max_video_views"] as? String
-                                    {
-                                        userBo.max_video_views = max_video_views
-                                    }
-                                    if let dailyViews = user["dailyViews"] as? String
-                                    {
-                                        userBo.dailyViews = dailyViews
-                                    }
-                                    if let dailyImgRem = user["dailyImgRem"] as? String
-                                    {
-                                        userBo.dailyImgRem = dailyImgRem
-                                    }
-                                    if let dailyVidViews = user["dailyVidViews"] as? String
-                                    {
-                                        userBo.dailyVidViews = dailyVidViews
-                                    }
-                                    if let dailyVidRem = user["dailyVidRem"] as? String
-                                    {
-                                        userBo.dailyVidRem = dailyVidRem
-                                    }
-                                    if let contactNo = user["contactNo"] as? String
-                                    {
-                                        userBo.contactNo = contactNo
-                                        OrbUserDefaults.setMobile(object: contactNo)
-                                    }
-                                    if let alternativeNo = user["alternativeNo"] as? String
-                                    {
-                                        userBo.alternativeNo = alternativeNo
-                                    }
-                                    if let address = user["address"] as? String
-                                    {
-                                        userBo.address = address
-                                    }
-                                    if let payment_money = user["payment_money"] as? String
-                                    {
-                                        userBo.payment_money = payment_money
-                                    }
-                                    if let due_date = user["due_date"] as? String
-                                    {
-                                        userBo.due_date = due_date
-                                    }
-                                }
-                                self.callBack.parsingFinished(userBo as AnyObject, withTag: obj.tag)
+                                userBo.id = "\(id.intValue)"
                             }
-                            else
+                            if let user_id = user["user_id"] as? String
                             {
-                                self.callBack.parsingError(SERVER_ERROR, withTag: obj.tag)
+                                userBo.user_id = user_id
+                                OrbUserDefaults.setUserId(object: user_id)
                             }
-                            
+                            if let company_logo = user["company_logo"] as? String
+                            {
+                                userBo.company_logo = company_logo
+                            }
+                            if let name = user["name"] as? String
+                            {
+                                OrbUserDefaults.setName(object: name)
+                                userBo.name = name
+                            }
+                            if let email = user["email"] as? String
+                            {
+                                userBo.email = email
+                            }
+                            if let linked_to_agency = user["linked_to_agency"] as? String
+                            {
+                                userBo.linked_to_agency = linked_to_agency
+                            }
+                            if let role = user["role"] as? String
+                            {
+                                userBo.role = role
+                            }
+                            if let account_type = user["account_type"] as? String
+                            {
+                                userBo.account_type = account_type
+                            }
+                            if let video_views = user["video_views"] as? NSNumber
+                            {
+                                userBo.video_views = "\(video_views.int64Value)"
+                            }
+                            if let image_views = user["image_views"] as? NSNumber
+                            {
+                                userBo.image_views = "\(image_views.int64Value)"
+                            }
+                            if let max_image_views = user["max_image_views"] as? NSNumber
+                            {
+                                userBo.max_image_views = "\(max_image_views.int64Value)"
+                            }
+                            if let max_video_views = user["max_video_views"] as? NSNumber
+                            {
+                                userBo.max_video_views = "\(max_video_views.int64Value)"
+                            }
+                            if let dailyViews = user["dailyViews"] as? String
+                            {
+                                userBo.dailyViews = dailyViews
+                            }
+                            if let dailyImgRem = user["dailyImgRem"] as? NSNumber
+                            {
+                                userBo.dailyImgRem = "\(dailyImgRem.int64Value)"
+                            }
+                            if let dailyVidViews = user["dailyVidViews"] as? NSNumber
+                            {
+                                userBo.dailyVidViews = "\(dailyVidViews.int64Value)"
+                            }
+                            if let dailyVidRem = user["dailyVidRem"] as? NSNumber
+                            {
+                                userBo.dailyVidRem = "\(dailyVidRem.int64Value)"
+                            }
+                            if let contactNo = user["contactNo"] as? String
+                            {
+                                userBo.contactNo = contactNo
+                                OrbUserDefaults.setMobile(object: contactNo)
+                            }
+                            if let alternativeNo = user["alternativeNo"] as? String
+                            {
+                                userBo.alternativeNo = alternativeNo
+                            }
+                            if let address = user["address"] as? String
+                            {
+                                userBo.address = address
+                            }
+                            if let payment_money = user["payment_money"] as? String
+                            {
+                                userBo.payment_money = payment_money
+                            }
+                            if let due_date = user["due_date"] as? String
+                            {
+                                userBo.due_date = due_date
+                            }
+                            if let designation = user["designation"] as? String
+                            {
+                                userBo.designation = designation
+                            }
+                            if let city = user["city"] as? String
+                            {
+                                userBo.city = city
+                            }
+                            if let verified = user["verified"] as? NSNumber
+                            {
+                                userBo.verified = verified.boolValue
+                            }
+                            if let agency = user["agency"] as? String
+                            {
+                                userBo.agency = agency
+                            }
+                            if let created_at = user["created_at"] as? String
+                            {
+                                userBo.created_at = created_at
+                            }
+                            if let updated_at = user["updated_at"] as? String
+                            {
+                                userBo.updated_at = updated_at
+                            }
+                            if let acccessToken = user["acccessToken"] as? String
+                            {
+                                OrbUserDefaults.setAccessToken(object: acccessToken)
+                            }
+
+                            self.callBack.parsingFinished(userBo as AnyObject, withTag: obj.tag)
                         }
                         else
                         {
@@ -146,6 +181,11 @@ class BusinessLayerClass: BaseBL {
                         self.callBack.parsingError(SERVER_ERROR, withTag: obj.tag)
 
                     }
+                }
+                else
+                {
+                    self.callBack.parsingError(SERVER_ERROR, withTag: obj.tag)
+                    
                 }
             }
         }
@@ -167,11 +207,12 @@ class BusinessLayerClass: BaseBL {
             }
             else
             {
-                if let error = obj.parsedDataDict["error"] as? String
+                if let error = obj.parsedDataDict["error"] as? Bool
                 {
-                    if Bool(error) == false
+                    if error == false
                     {
                         self.callBack.parsingFinished("Success" as AnyObject, withTag: obj.tag)
+                        
                     }
                     else
                     {
@@ -186,9 +227,11 @@ class BusinessLayerClass: BaseBL {
     {
         let obj : HttpRequest = HttpRequest()
         obj.tag = NSInteger(ParsingConstant.getUserData.rawValue)
-        obj._serviceURL = developer_API + "userdata/clientid=" + OrbUserDefaults.getUserId() //API Method
-        obj.MethodNamee = "GET"
+        obj._serviceURL = developer_API + "userdata" //API Method
+        obj.MethodNamee = "POST"
         obj.serviceName = ""
+        var dataDict = [String:AnyObject]()
+        dataDict["clientid"] = OrbUserDefaults.getUserId() as AnyObject?
         obj.params = [:]
         obj.doGetSOAPResponse {(success : Bool) -> Void in
             if !success
@@ -197,9 +240,9 @@ class BusinessLayerClass: BaseBL {
             }
             else
             {
-                if let error = obj.parsedDataDict["error"] as? String
+                if let error = obj.parsedDataDict["error"] as? Bool
                 {
-                    if Bool(error) == false
+                    if error == false
                     {
                         let homeData = HomeData()
                         if let lastFifteenMins = obj.parsedDataDict["lastFifteenMins"] as? [String:AnyObject]
@@ -385,9 +428,11 @@ class BusinessLayerClass: BaseBL {
     {
         let obj : HttpRequest = HttpRequest()
         obj.tag = NSInteger(ParsingConstant.getUserAds.rawValue)
-        obj._serviceURL = developer_API + "userads/clientid=" + OrbUserDefaults.getUserId() //API Method
-        obj.MethodNamee = "GET"
+        obj._serviceURL = developer_API + "userads" //API Method
+        obj.MethodNamee = "POST"
         obj.serviceName = ""
+        var dataDict = [String:AnyObject]()
+        dataDict["clientid"] = OrbUserDefaults.getUserId() as AnyObject?
         obj.params = [:]
         obj.doGetSOAPResponse {(success : Bool) -> Void in
             if !success
@@ -396,9 +441,9 @@ class BusinessLayerClass: BaseBL {
             }
             else
             {
-                if let error = obj.parsedDataDict["error"] as? String
+                if let error = obj.parsedDataDict["error"] as? Bool
                 {
-                    if Bool(error) == false
+                    if error == false
                     {
                         let userAds = UserAdsBO()
                         if let video = obj.parsedDataDict["video"] as? [String:AnyObject]
@@ -481,7 +526,7 @@ class BusinessLayerClass: BaseBL {
         obj.MethodNamee = "POST"
         obj.serviceName = ""
         var dataDict = [String:AnyObject]()
-        dataDict["clientid"] = OrbUserDefaults.getUserId() as AnyObject?
+//        dataDict["clientid"] = OrbUserDefaults.getUserId() as AnyObject?
         dataDict["mobileno"] = OrbUserDefaults.getMobile() as AnyObject?
         dataDict["subject"] = subject as AnyObject?
         dataDict["message"] = msg as AnyObject?
@@ -493,9 +538,9 @@ class BusinessLayerClass: BaseBL {
             }
             else
             {
-                if let error = obj.parsedDataDict["error"] as? String
+                if let error = obj.parsedDataDict["error"] as? Bool
                 {
-                    if Bool(error) == false
+                    if error == false
                     {
                         self.callBack.parsingFinished("Success" as AnyObject, withTag: obj.tag)
                     }
@@ -511,9 +556,11 @@ class BusinessLayerClass: BaseBL {
     {
         let obj : HttpRequest = HttpRequest()
         obj.tag = NSInteger(ParsingConstant.getLeads.rawValue)
-        obj._serviceURL = developer_API + "leads/clientid=" + OrbUserDefaults.getUserId()
-        obj.MethodNamee = "GET"
+        obj._serviceURL = developer_API + "leads"
+        obj.MethodNamee = "POST"
         obj.serviceName = ""
+        var dataDict = [String:AnyObject]()
+        dataDict["clientid"] = OrbUserDefaults.getUserId() as AnyObject?
         obj.params = [:]
         obj.doGetSOAPResponse {(success : Bool) -> Void in
             if !success
@@ -522,9 +569,9 @@ class BusinessLayerClass: BaseBL {
             }
             else
             {
-                if let error = obj.parsedDataDict["error"] as? String
+                if let error = obj.parsedDataDict["error"] as? Bool
                 {
-                    if Bool(error) == false
+                    if error == false
                     {
                         var arrLeads = [String]()
                         if let Leads = obj.parsedDataDict["Leads"] as? [[String:AnyObject]]
@@ -558,7 +605,7 @@ class BusinessLayerClass: BaseBL {
         var dataDict = [String:AnyObject]()
         dataDict["link"] = link as AnyObject?
         dataDict["content"] = content as AnyObject?
-        dataDict["clientid"] = OrbUserDefaults.getUserId() as AnyObject?
+//        dataDict["clientid"] = OrbUserDefaults.getUserId() as AnyObject?
         obj.params = dataDict
         obj.doGetSOAPResponse {(success : Bool) -> Void in
             if !success
@@ -567,9 +614,9 @@ class BusinessLayerClass: BaseBL {
             }
             else
             {
-                if let error = obj.parsedDataDict["error"] as? String
+                if let error = obj.parsedDataDict["error"] as? Bool
                 {
-                    if Bool(error) == false
+                    if error == false
                     {
                         self.callBack.parsingFinished("Success" as AnyObject, withTag: obj.tag)
                     }
@@ -592,9 +639,9 @@ class BusinessLayerClass: BaseBL {
             request.httpMethod = "POST"
             let boundary = "Orb"
             let body = NSMutableData()
-            body.append(("--\(boundary)\r\n").data(using: String.Encoding.utf8)!)
-            body.append("Content-Disposition: form-data; name=\"clientid\"\r\n\r\n".data(using: String.Encoding.utf8)!)
-            body.append("\(OrbUserDefaults.getUserId())\r\n".data(using: String.Encoding.utf8, allowLossyConversion: true)!)
+//            body.append(("--\(boundary)\r\n").data(using: String.Encoding.utf8)!)
+//            body.append("Content-Disposition: form-data; name=\"clientid\"\r\n\r\n".data(using: String.Encoding.utf8)!)
+//            body.append("\(OrbUserDefaults.getUserId())\r\n".data(using: String.Encoding.utf8, allowLossyConversion: true)!)
             body.append(("--\(boundary)\r\n").data(using: String.Encoding.utf8)!)
             body.append("Content-Disposition: form-data; name=\"\(dataType)\"; filename=\"\(fileName)\"\r\n".data(using: String.Encoding.utf8)!)
             body.append("Content-Type: contentType\r\n\r\n".data(using: String.Encoding.utf8)!)
@@ -629,9 +676,9 @@ class BusinessLayerClass: BaseBL {
                             }
                             else
                             {
-                                if let error = parsedDataDict["error"] as? String
+                                if let error = parsedDataDict["error"] as? Bool
                                 {
-                                    if Bool(error) == false
+                                    if error == false
                                     {
                                         if let message = parsedDataDict["message"] as? String
                                         {

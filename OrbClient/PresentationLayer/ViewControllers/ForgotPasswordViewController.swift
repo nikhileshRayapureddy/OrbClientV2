@@ -71,7 +71,9 @@ class ForgotPasswordViewController: BaseViewController,ParserDelegate {
     }
     func parsingFinished(_ object: AnyObject?, withTag tag: NSInteger) {
         app_delegate.removeloder()
-        let _ = self.navigationController?.popViewController(animated: true)
+        DispatchQueue.main.async {
+            self.navigationController?.popViewController(animated: true)
+        }
     }
 
     @IBAction func btnBackClicked(_ sender: UIButton) {
